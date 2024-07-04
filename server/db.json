@@ -1,47 +1,46 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "admin",
-        "password": "123",
-        "email": "admin@example.com",
-        "age": 15
-      }
-    ],
-    "examinations": [
-      {
-        "id": 15,
-        "name": "Thi đại học",
-        "date":"04/10/2024"
-      }
-    ],
-    "lessons":[
-      {
-        "id": 1,
-        "examination_id": 15,
-        "subject": "Toán",
-        "classroom": "1A",
-        "date":"3/7/2024"
-      }
-    ],
-    "test": [
-      {
-        "id": 1,
-        "lesson_id": "20",
-        "name": "toán",
-        "duration": 60,
-        "date":"4/7/2024",
-        "questions": [],
-        "answer":[]
-      }
-    ],
-    "comments":[
-      {
-        "id":1,
-        "user_id": 1,
-        "lesson_id": 1,
-        "content": "Rất tuyệt vời"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "123",
+      "email": "admin@gmail.com",
+      "age": 15
+    }
+  ],
+  "examinations": [
+    {
+      "id": 15,
+      "name": "Thi đại học",
+      "date": "04/10/2024"
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "examination_id": 15,
+      "subject": "Toán",
+      "classroom": "1A",
+      "date": "3/7/2024"
+    }
+  ],
+  "test": [
+    {
+      "id": 1,
+      "lesson_id": "20",
+      "name": "toán",
+      "duration": 60,
+      "date": "4/7/2024",
+      "questions": [],
+      "answer": []
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "lesson_id": 1,
+      "content": "Rất tuyệt vời"
+    }
+  ]
+}
