@@ -14,3 +14,10 @@ export interface Course {
     error: string | null;
   }
   
+
+export interface FormData {
+  name: string;
+  username: string;
+  password: string;
+  repassword: string;
+}
