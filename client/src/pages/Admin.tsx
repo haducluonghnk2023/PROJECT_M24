@@ -14,7 +14,7 @@ import {
   MdOutlineAlignHorizontalLeft,
   MdOutlineMenuOpen,
 } from "react-icons/md";
-import { BsMenuButtonWideFill } from "react-icons/bs";
+import { BsBookmarkDash, BsMenuButtonWideFill } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 
 const { Header, Sider, Content } = Layout;
@@ -31,7 +31,7 @@ export default function Admin() {
         <div className="flex justify-center my-[30px]">
           <div className="demo-logo-vertical rounded-md flex justify-center items-center bg-white h-[50px] w-[80%]">
             <div className="flex justify-center items-center ">
-              <FaVanShuttle size={25} />
+              <BsBookmarkDash size={25} />
               <p className="">
                 <span className="font-bold text-red-600">RESCUE</span>
                 <span className="font-bold text-sky-400">-ACE</span>

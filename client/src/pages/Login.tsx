@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface LoginForm {
-  email: string; // Thay đổi thành email
+  email: string;
   password: string;
 }
 
 export default function Login() {
   const [formData, setFormData] = useState<LoginForm>({
-    email: "", // Thay đổi thành email
+    email: "",
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginForm>>({});
@@ -26,11 +26,11 @@ export default function Login() {
     const newErrors: Partial<LoginForm> = {};
 
     if (!formData.email) {
-      newErrors.email = "Email không được để trống"; // Thay đổi thông báo lỗi
+      newErrors.email = "Email không được để trống";
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
-        newErrors.email = "Định dạng email không hợp lệ"; // Thay đổi thông báo lỗi
+        newErrors.email = "Định dạng email không hợp lệ";
       }
     }
 
