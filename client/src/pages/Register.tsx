@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-
+import bcrypt from "bcryptjs";
 interface FormData {
   email: string;
   username: string;
@@ -50,6 +51,8 @@ export default function Register() {
     // Kiểm tra password
     if (!formData.password) {
       newErrors.password = "Password không được để trống";
+    } else if (formData.password.length < 7) {
+      newErrors.password = "Password phải có ít nhất 7 kí tự";
     }
 
     // Kiểm tra repassword
@@ -66,9 +69,27 @@ export default function Register() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
-      // Giả sử xử lý đăng ký thành công
-      console.log("Dữ liệu form:", formData);
-      navigate("/login");
+      bcrypt
+        .hash(formData.password, 10)
+        .then((hashedPassword: any) => {
+          const userData = {
+            ...formData,
+            password: hashedPassword, // Replace plain password with hashed password
+          };
+
+          axios
+            .post("http://localhost:8080/users", userData)
+            .then((response) => {
+              console.log("Đăng ký thành công:", response.data);
+              navigate("/login");
+            })
+            .catch((error) => {
+              console.error("Lỗi khi đăng ký:", error);
+            });
+        })
+        .catch((hashError: any) => {
+          console.error("Lỗi khi mã hóa mật khẩu:", hashError);
+        });
     }
   };
 
