@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../styles/allUser.css";
-import axios from "axios";
+import { fetchUsers, updateUserStatus } from "../store/reducers/adminReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
+
 interface User {
   id: number;
   username: string;
@@ -9,29 +12,21 @@ interface User {
   role: string;
   status: number;
 }
+
 export default function AllUser() {
-  const [users, setUsers] = useState<User[]>([]);
+  const dispatch: AppDispatch = useDispatch();
+  const users = useSelector((state: RootState) => state.admin.users);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/users")
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error("err:", error);
-      });
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   const toggleUserStatus = (userId: number) => {
-    const updatedUsers: any = users.map((user) => {
-      if (user.id === userId) {
-        let result = { ...user, status: user.status === 1 ? 0 : 1 };
-        axios.put(`http://localhost:8080/users/${user.id}`, result);
-      } else {
-        return user;
-      }
-    });
-    console.log(updatedUsers);
+    const userToUpdate = users.find((user: User) => user.id === userId);
+    if (userToUpdate) {
+      const updatedStatus = userToUpdate.status === 1 ? 0 : 1;
+      dispatch(updateUserStatus({ userId, status: updatedStatus }));
+    }
   };
 
   return (
@@ -45,7 +40,7 @@ export default function AllUser() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users.map((user: User) => (
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>

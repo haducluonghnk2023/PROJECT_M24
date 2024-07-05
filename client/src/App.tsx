@@ -8,6 +8,7 @@ import AddSubject from "./pages/AddSubject";
 import AllSubject from "./pages/AllSubject";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import AddUser from "./pages/AddUser";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="all-exam" element={<AllExam />} />
           <Route path="add-subject" element={<AddSubject />} />
           <Route path="all-subject" element={<AllSubject />} />
+          <Route path="add-user" element={<AddUser />} />
         </Route>
       </Routes>
     </div>

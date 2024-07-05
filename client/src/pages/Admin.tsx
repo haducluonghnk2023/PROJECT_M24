@@ -62,7 +62,7 @@ export default function Admin() {
               label: "Quản lí tài khoản",
               children: [
                 {
-                  key: "add-exam",
+                  key: "add-user",
                   label: "Thêm mới tài khoản",
                   icon: <UploadOutlined />,
                 },
