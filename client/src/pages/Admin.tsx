@@ -59,11 +59,16 @@ export default function Admin() {
             {
               key: "user",
               icon: <FaUsers />,
-              label: "Quản lí người dùng",
+              label: "Quản lí tài khoản",
               children: [
                 {
+                  key: "add-exam",
+                  label: "Thêm mới tài khoản",
+                  icon: <UploadOutlined />,
+                },
+                {
                   key: "all-user",
-                  label: "Tất cả người dùng",
+                  label: "Tất cả tài khoản",
                   icon: <UploadOutlined />,
                 },
               ],

@@ -21,3 +21,8 @@ export interface FormData {
   password: string;
   repassword: string;
 }
+export interface User{
+  name: string;
+  email: string;
+  password: string;
+}
