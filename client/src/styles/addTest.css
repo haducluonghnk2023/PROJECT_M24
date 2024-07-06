@@ -1,4 +1,4 @@
-.add-user {
+.add-test {
     max-width: 400px;
     margin: 0 auto;
     padding: 2rem;
@@ -7,35 +7,35 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
   
-  .add-user h2 {
+  .add-test h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
     text-align: center;
   }
   
-  .add-user form {
+  .add-test form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .add-user label {
+  .add-test label {
     font-weight: bold;
   }
   
-  .add-user input {
+  .add-test input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
   }
   
-  .add-user input:focus {
+  .add-test input:focus {
     outline: none;
     border-color: #4d90fe;
   }
   
-  .add-user button[type="submit"] {
+  .add-test button[type="submit"] {
     background-color: #4d90fe;
     color: white;
     border: none;
@@ -45,7 +45,7 @@
     cursor: pointer;
   }
   
-  .add-user button[type="submit"]:hover {
+  .add-test button[type="submit"]:hover {
     background-color: #3c7ae6;
   }
   .success-message {

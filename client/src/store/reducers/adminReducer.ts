@@ -1,20 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { AdminState, User } from "../interface/interface";
 
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  birthdate: string;
-  role: string;
-  status: number;
-}
 
-interface AdminState {
-  users: User[];
-  loading: boolean;
-  error: string | null;
-}
 
 const initialState: AdminState = {
   users: [],
@@ -30,7 +18,6 @@ export const fetchUsers:any = createAsyncThunk<User[]>(
     return response.data;
   }
 );
-
 
 export const updateUserStatus:any = createAsyncThunk<
   User,
@@ -62,6 +49,7 @@ const adminSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "không tìm được người dùng";
       })
+      
       .addCase(updateUserStatus.pending, (state) => {
         state.loading = true;
         state.error = null;

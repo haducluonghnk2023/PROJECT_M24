@@ -1,40 +1,67 @@
-.all-course-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .all-course-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .examinations-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .examinations-table th, .examinations-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .examinations-table th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .examinations-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-/*   
-  .examinations-table tr:hover {
-    background-color: #ddd;
-  } */
-  
+.table-container {
+  margin: 20px;
+}
+
+.courses-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.courses-table th, .courses-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.courses-table th {
+  background-color: #f2f2f2;
+}
+
+.courses-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.btn-edit {
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn-delete{
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.int {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.btn-edit{
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn-delete{
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+

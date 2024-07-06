@@ -8,6 +8,8 @@ interface LoginForm {
 }
 
 export default function Login() {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [formData, setFormData] = useState<LoginForm>({
     email: "",
     password: "",
@@ -52,7 +54,10 @@ export default function Login() {
           navigate("/admin");
         })
         .catch((error) => {
-          console.error("Lỗi khi đăng ký:", error);
+          setErrorMessage(
+            "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin."
+          );
+          console.error("Lỗi khi đăng nhập:", error);
         });
     }
   };

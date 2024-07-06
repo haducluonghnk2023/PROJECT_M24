@@ -31,6 +31,7 @@ export default function AllUser() {
 
   return (
     <div className="table-container">
+      <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
       <table className="user-table">
         <thead>
           <tr>

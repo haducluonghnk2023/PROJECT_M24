@@ -1,12 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { adminReducer } from "./reducers/adminReducer";
+import { courseReducer } from "./reducers/courseReducer";
+// import addUserReducer from "./reducers/addUserReducer";
+// import addUserReducer from "./reducers/addUserReducer";
 
 
 
 const store:any = configureStore({
   reducer: {
-    admin:adminReducer 
-  
+    admin:adminReducer ,
+    courses:courseReducer,
+    // addUser:addUserReducer
   },
 });
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FaUsers, FaVanShuttle } from "react-icons/fa6";
+import { FaRegNoteSticky, FaUsers, FaVanShuttle } from "react-icons/fa6";
 import "../styles/admin.css";
 import {
   MenuFoldOutlined,
@@ -13,9 +13,16 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {
   MdOutlineAlignHorizontalLeft,
   MdOutlineMenuOpen,
+  MdOutlineQuestionAnswer,
 } from "react-icons/md";
-import { BsBookmarkDash, BsMenuButtonWideFill } from "react-icons/bs";
+import {
+  BsBookmarkDash,
+  BsMenuButtonWideFill,
+  BsPeopleFill,
+} from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
+import { CgMenuGridR } from "react-icons/cg";
+import { CiSquareQuestion } from "react-icons/ci";
 
 const { Header, Sider, Content } = Layout;
 export default function Admin() {
@@ -69,7 +76,7 @@ export default function Admin() {
                 {
                   key: "all-user",
                   label: "Tất cả tài khoản",
-                  icon: <UploadOutlined />,
+                  icon: <BsPeopleFill />,
                 },
               ],
             },
@@ -91,36 +98,53 @@ export default function Admin() {
               ],
             },
             {
-              key: "test",
-              icon: <BsMenuButtonWideFill />,
-              label: "Quản lí bài thi",
-              children: [
-                {
-                  key: "add-test",
-                  label: "Thêm mới bài thi",
-                  icon: <UploadOutlined />,
-                },
-                {
-                  key: "all-test",
-                  label: "Tất cả bài thi",
-                  icon: <MdOutlineAlignHorizontalLeft />,
-                },
-              ],
-            },
-            {
               key: "subject",
               icon: <SiProducthunt />,
-              label: "Quản lí môn học",
+              label: "Quản lí môn thi",
               children: [
                 {
                   key: "add-subject",
-                  label: "Thêm môn học",
+                  label: "Thêm môn thi",
                   icon: <UploadOutlined />,
                 },
                 {
                   key: "all-subject",
-                  label: "Tất cả môn học",
-                  icon: <MdOutlineAlignHorizontalLeft />,
+                  label: "Tất cả môn thi",
+                  icon: <CgMenuGridR />,
+                },
+              ],
+            },
+            {
+              key: "test",
+              icon: <BsMenuButtonWideFill />,
+              label: "Quản lí đề thi",
+              children: [
+                {
+                  key: "add-test",
+                  label: "Thêm mới đề thi",
+                  icon: <UploadOutlined />,
+                },
+                {
+                  key: "all-test",
+                  label: "Tất cả đề thi",
+                  icon: <FaRegNoteSticky />,
+                },
+              ],
+            },
+            {
+              key: "questions",
+              icon: <CiSquareQuestion />,
+              label: "Quản lí câu hỏi",
+              children: [
+                {
+                  key: "add-question",
+                  label: "Thêm câu hỏi",
+                  icon: <UploadOutlined />,
+                },
+                {
+                  key: "all-question",
+                  label: "Tất cả câu hỏi",
+                  icon: <MdOutlineQuestionAnswer />,
                 },
               ],
             },

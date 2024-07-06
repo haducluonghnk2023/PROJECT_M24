@@ -6,7 +6,7 @@
       "password": "123",
       "email": "admin@gmail.com",
       "role": 1,
-      "status": 1
+      "status": 0
     },
     {
       "id": 2,
@@ -14,7 +14,21 @@
       "password": "123",
       "email": "user@gmail.com",
       "role": 0,
-      "status": 1
+      "status": 0
+    },
+    {
+      "email": "haducluongdz@gmail.com",
+      "username": "haducluong",
+      "password": "$2a$10$5.aaK7aYtJRCpfyFy0ggmeEwjiDmlfp.NhTcCaSsvXnLcp5d8Lmla",
+      "repassword": "123456789",
+      "id": 3
+    },
+    {
+      "email": "haducluongdz@gmail.com",
+      "username": "haducluong",
+      "password": "$2a$10$YxrOt9GRfPKlZfkX/Rpj0Oq5pvCUq7IyhqWDfFV9NBLmMYvNFJI8G",
+      "repassword": "$2a$10$LLbRvYozCjr4a6U9TRLA6uooVpnOXzeTE4F8kyQCFOo/6UjUC9tc.",
+      "id": 4
     }
   ],
   "courses": [
