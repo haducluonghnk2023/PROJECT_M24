@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "../styles/allCourse.css";
-import { AppDispatch, RootState } from "../store/store";
+import "../../styles/allCourse.css";
+
 import { useDispatch, useSelector } from "react-redux";
-import { fecthCourses } from "../service/course.servce";
+import { AppDispatch, RootState } from "../../store/store";
+import { fecthCourses } from "../../service/course.servce";
+
 export default function AllExam() {
   const dispatch: AppDispatch = useDispatch();
   const course = useSelector((state: RootState) => state.admin.courses);

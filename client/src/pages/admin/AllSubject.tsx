@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
-import "../styles/allCourse.css";
-import { AppDispatch, RootState } from "../store/store";
+import "../../styles/allSubject.css";
+
 import { useDispatch, useSelector } from "react-redux";
-import { fecthCourses } from "../service/course.servce";
-export default function AllExam() {
+import { AppDispatch, RootState } from "../../store/store";
+// import { fecthCourses } from "../../service/course.servce";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const fetchTest: any = createAsyncThunk<any>("admin/fetchTest", async () => {
+  const res = await axios.get("http://localhost:8080/test");
+  // console.log(res.data);
+  return res.data;
+});
+export default function AllSubject() {
   const dispatch: AppDispatch = useDispatch();
-  const subject = useSelector((state: RootState) => state.admin.subject);
+  const subject = useSelector((state: RootState) => state);
+  console.log(subject);
 
   useEffect(() => {
-    dispatch(fecthCourses());
+    dispatch(fetchTest());
   }, [dispatch]);
 
   return (

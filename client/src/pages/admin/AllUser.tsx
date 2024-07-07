@@ -1,21 +1,14 @@
 import { useEffect } from "react";
-import "../styles/allUser.css";
-import { fetchUsers, updateUserStatus } from "../store/reducers/adminReducer";
+import "../../styles/allUser.css";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  birthdate: string;
-  role: string;
-  status: number;
-}
+import { AppDispatch, RootState } from "../../store/store";
+import { fetchUsers, updateUserStatus } from "../../service/course.servce";
+import { User } from "../../store/interface/interface";
 
 export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
   const users = useSelector((state: RootState) => state.admin.users);
+  // console.log(users);
 
   useEffect(() => {
     dispatch(fetchUsers());

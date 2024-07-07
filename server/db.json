@@ -17,17 +17,20 @@
       "status": 0
     },
     {
-      "email": "haducluongdz@gmail.com",
       "username": "haducluong",
-      "password": "$2a$10$5.aaK7aYtJRCpfyFy0ggmeEwjiDmlfp.NhTcCaSsvXnLcp5d8Lmla",
-      "repassword": "123456789",
+      "email": "haducluongdz@gmail.com",
+      "password": "$2a$10$8Gmqin.tfsHSUq36BL3h7.uyCS.EwfwGuFejfNm.Y5S/cf7lnSnWO",
+      "role": 0,
+      "status": 0,
       "id": 3
     },
     {
-      "email": "haducluongdz@gmail.com",
-      "username": "haducluong",
-      "password": "$2a$10$YxrOt9GRfPKlZfkX/Rpj0Oq5pvCUq7IyhqWDfFV9NBLmMYvNFJI8G",
-      "repassword": "$2a$10$LLbRvYozCjr4a6U9TRLA6uooVpnOXzeTE4F8kyQCFOo/6UjUC9tc.",
+      "username": "phamvan minh",
+      "email": "pvm@gmail.com",
+      "password": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
+      "role": 0,
+      "status": 0,
+      "repassword": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "id": 4
     }
   ],
@@ -63,7 +66,7 @@
       "description": "Luyện thi Hóa học lớp 10"
     }
   ],
-  "exams": [
+  "test": [
     {
       "id": 1,
       "lesson_id": "20",

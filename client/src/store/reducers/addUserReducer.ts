@@ -1,6 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const initialState:any = {
+export const addUser:any = createAsyncThunk(
+  'addUser/addUser',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('http://localhost:8080/users', userData);
+      return response.data;
+    } catch (error:any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+const initialState = {
   users: [],
   loading: false,
   error: null,
@@ -9,21 +22,22 @@ const initialState:any = {
 const addUserSlice:any = createSlice({
   name: 'addUser',
   initialState,
-  reducers: {
-    addUserRequest: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    addUserSuccess: (state, action) => {
-      state.loading = false;
-      state.users.push(action.payload);
-    },
-    addUserFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder:any) => {
+    builder
+      .addCase(addUser.pending, (state:any) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addUser.fulfilled, (state:any, action:any) => {
+        state.loading = false;
+        state.users.push(action.payload);
+      })
+      .addCase(addUser.rejected, (state:any, action:any) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { addUserRequest, addUserSuccess, addUserFailure } = addUserSlice.actions;
 export default addUserSlice.reducer;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/addCourse.css";
+import "../../styles/addCourse.css";
 export default function AddExam() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   return (

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs";
 
 interface LoginForm {
   email: string;
@@ -9,20 +10,13 @@ interface LoginForm {
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
-
   const [formData, setFormData] = useState<LoginForm>({
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginForm>>({});
+  const [emailExists, setEmailExists] = useState<boolean | null>(null);
   const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const validate = () => {
     const newErrors: Partial<LoginForm> = {};
@@ -35,7 +29,6 @@ export default function Login() {
         newErrors.email = "Định dạng email không hợp lệ";
       }
     }
-
     if (!formData.password) {
       newErrors.password = "Password không được để trống";
     }
@@ -43,22 +36,75 @@ export default function Login() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  const handleChange: any = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (e.target.name === "email") {
+      const email = e.target.value;
+      const response = await axios.get(
+        `http://localhost:8080/users?email_like=${email}`
+      );
+
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].email === email) {
+          const password = response.data[i].password;
+          // console.log(password);
+        }
+      }
+      // console.log(response.data.length);
+      // console.log(email);
+    }
+    // console.log(e.target.value);
+  };
+  const handleChangePassword = async (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // const passwordLogin = await bcrypt.hash(formData.password, 10);
+    // console.log(passwordLogin);
     if (validate()) {
-      axios
-        .get("http://localhost:8080/users")
-        .then((response) => {
-          console.log("Đăng nhập thành công:", response.data);
-          navigate("/admin");
-        })
-        .catch((error) => {
-          setErrorMessage(
-            "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin."
+      try {
+        const response = await axios.get("http://localhost:8080/users");
+        const user = response.data.find(
+          (user: any) => user.email === formData.email
+        );
+
+        if (user) {
+          const passwordMatch = await bcrypt.compare(
+            formData.password,
+            user.password
           );
-          console.error("Lỗi khi đăng nhập:", error);
-        });
+          console.log(formData.password);
+          console.log(user.password);
+          console.log(passwordMatch);
+
+          if (passwordMatch) {
+            console.log("Đăng nhập thành công:", user);
+            navigate("/admin");
+          } else {
+            setErrorMessage(
+              "Mật khẩu không đúng. Vui lòng kiểm tra lại thông tin."
+            );
+          }
+        } else {
+          setErrorMessage(
+            "Email không tồn tại. Vui lòng kiểm tra lại thông tin."
+          );
+        }
+      } catch (error) {
+        setErrorMessage(
+          "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin."
+        );
+        console.error("Lỗi khi đăng nhập:", error);
+      }
     }
   };
 
@@ -113,7 +159,7 @@ export default function Login() {
                     errors.password ? "border-red-500" : "border-gray-300"
                   } text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
                   value={formData.password}
-                  onChange={handleChange}
+                  onChange={handleChangePassword}
                 />
                 {errors.password && (
                   <p className="text-red-500 text-sm mt-1">{errors.password}</p>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/addSubject.css";
+import "../../styles/addSubject.css";
 export default function AddSubject() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   return (

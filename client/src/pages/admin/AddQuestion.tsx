@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/addQuestion.css";
+import "../../styles/addQuestion.css";
 export default function AddQuestion() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   return (

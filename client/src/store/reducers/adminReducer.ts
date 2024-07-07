@@ -1,35 +1,13 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice,  PayloadAction } from "@reduxjs/toolkit";
+
 import { AdminState, User } from "../interface/interface";
-
-
+import { fetchUsers, updateUserStatus } from "../../service/course.servce";
 
 const initialState: AdminState = {
   users: [],
   loading: false,
   error: null,
 };
-
-// hoạt động  bất đồng bộ
-export const fetchUsers:any = createAsyncThunk<User[]>(
-  "admin/fetchUsers",
-  async () => {
-    const response = await axios.get("http://localhost:8080/users");
-    return response.data;
-  }
-);
-
-export const updateUserStatus:any = createAsyncThunk<
-  User,
-  { userId: number; status: number }
->("admin/updateUserStatus", async ({ userId, status }) => {
-  const response = await axios.patch(`http://localhost:8080/users/${userId}`, {
-    status,
-  });
-  console.log(response);
-  return response.data;
-});
-
 
 const adminSlice = createSlice({
   name: "admin",

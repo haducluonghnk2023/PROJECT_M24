@@ -7,6 +7,8 @@ interface FormData {
   username: string;
   password: string;
   repassword: string;
+  role: string;
+  status: number;
 }
 
 export default function Register() {
@@ -15,6 +17,8 @@ export default function Register() {
     username: "",
     password: "",
     repassword: "",
+    role: "user",
+    status: 1,
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const navigate = useNavigate();
@@ -71,31 +75,24 @@ export default function Register() {
     if (validate()) {
       bcrypt
         .hash(formData.password, 10)
-        .then((hashedPassword: string) => {
-          bcrypt
-            .hash(formData.repassword, 10)
-            .then((hashedRepassword: string) => {
-              const userData = {
-                ...formData,
-                password: hashedPassword,
-                repassword: hashedRepassword,
-              };
+        .then((hashedPassword) => {
+          const userData = {
+            ...formData,
+            password: hashedPassword,
+            repassword: hashedPassword,
+          };
 
-              axios
-                .post("http://localhost:8080/users", userData)
-                .then((response) => {
-                  console.log("Đăng ký thành công:", response.data);
-                  navigate("/login");
-                })
-                .catch((error) => {
-                  console.error("Lỗi khi đăng ký:", error);
-                });
+          axios
+            .post("http://localhost:8080/users", userData)
+            .then((response) => {
+              console.log("Đăng ký thành công:", response.data);
+              navigate("/login");
             })
-            .catch((hashError: any) => {
-              console.error("Lỗi khi mã hóa mật khẩu xác nhận:", hashError);
+            .catch((error) => {
+              console.error("Lỗi khi đăng ký:", error);
             });
         })
-        .catch((hashError: any) => {
+        .catch((hashError) => {
           console.error("Lỗi khi mã hóa mật khẩu:", hashError);
         });
     }

@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import Admin from "./pages/Admin";
-import DashBoard from "./pages/DashBoard";
-import AllUser from "./pages/AllUser";
-import AddExam from "./pages/AddExam";
-import AllExam from "./pages/AllExam";
-import AddSubject from "./pages/AddSubject";
-import AllSubject from "./pages/AllSubject";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import AddUser from "./pages/AddUser";
-import AllTest from "./pages/AllTest";
-import AddTest from "./pages/AddTest";
-import AddQuestion from "./pages/AddQuestion";
-import AllQuestion from "./pages/AllQuestion";
+import Admin from "./pages/admin/Admin";
+import DashBoard from "./pages/admin/DashBoard";
+import AllUser from "./pages/admin/AllUser";
+import AddExam from "./pages/admin/AddExam";
+import AllExam from "./pages/admin/AllExam";
+import AddSubject from "./pages/admin/AddSubject";
+import AllSubject from "./pages/admin/AllSubject";
+import Register from "./pages/admin/Register";
+import Login from "./pages/admin/Login";
+import AddUser from "./pages/admin/AddUser";
+import AllTest from "./pages/admin/AllTest";
+import AddTest from "./pages/admin/AddTest";
+import AddQuestion from "./pages/admin/AddQuestion";
+import AllQuestion from "./pages/admin/AllQuestion";
 
 export default function App() {
   return (
