@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FaRegNoteSticky, FaUsers, FaVanShuttle } from "react-icons/fa6";
-import "../../styles/admin.css";
+import { FaRegNoteSticky, FaUsers } from "react-icons/fa6";
+import "../../styles/admin.scss";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -83,16 +83,16 @@ export default function Admin() {
             {
               key: "exam",
               icon: <MdOutlineMenuOpen />,
-              label: "Quản lí khóa thi",
+              label: "Quản lí khóa luyện thi",
               children: [
                 {
                   key: "add-exam",
-                  label: "Thêm mới khóa thi",
+                  label: "Thêm mới khóa luyện thi",
                   icon: <UploadOutlined />,
                 },
                 {
                   key: "all-exam",
-                  label: "Tất cả khóa thi",
+                  label: "Tất cả khóa luyện thi",
                   icon: <MdOutlineAlignHorizontalLeft />,
                 },
               ],

@@ -2,14 +2,7 @@ import axios from "axios";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
-interface FormData {
-  email: string;
-  username: string;
-  password: string;
-  repassword: string;
-  role: string;
-  status: number;
-}
+import { FormData } from "../../store/interface/interface";
 
 export default function Register() {
   const [formData, setFormData] = useState<FormData>({

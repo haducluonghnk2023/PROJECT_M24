@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/addTest.css";
+import "../../styles/addTest.scss";
 export default function AddTest() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   return (

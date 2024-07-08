@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import "../../styles/allUser.css";
+import { useEffect, useState } from "react";
+import "../../styles/allUser.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchUsers, updateUserStatus } from "../../service/course.servce";
@@ -8,7 +8,8 @@ import { User } from "../../store/interface/interface";
 export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
   const users = useSelector((state: RootState) => state.admin.users);
-  // console.log(users);
+  // const [searchName, setSearchName] = useState("");
+  console.log(users);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -16,6 +17,7 @@ export default function AllUser() {
 
   const toggleUserStatus = (userId: number) => {
     const userToUpdate = users.find((user: User) => user.id === userId);
+
     if (userToUpdate) {
       const updatedStatus = userToUpdate.status === 1 ? 0 : 1;
       dispatch(updateUserStatus({ userId, status: updatedStatus }));
@@ -25,6 +27,11 @@ export default function AllUser() {
   return (
     <div className="table-container">
       <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
+      <select name="" id="">
+        <option value="">Sắp xếp theo:</option>
+        <option value="">Tên</option>
+        <option value="">Email</option>
+      </select>
       <table className="user-table">
         <thead>
           <tr>

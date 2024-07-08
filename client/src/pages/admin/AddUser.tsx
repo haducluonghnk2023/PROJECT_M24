@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import bcrypt from "bcryptjs";
-import "../../styles/addUser.css";
+import "../../styles/addUser.scss";
 import { addUser } from "../../store/reducers/addUserReducer";
 
 export default function AddUser() {
@@ -11,10 +11,41 @@ export default function AddUser() {
     email: "",
     password: "",
     role: 0,
-    status: 0,
+    status: 1,
   });
+  const [formErrors, setFormErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: any) => state.addUser);
+  const { error } = useSelector((state: any) => state.addUser);
+
+  const validate = () => {
+    let errors = { username: "", email: "", password: "" };
+    let isValid = true;
+
+    if (!formData.username) {
+      errors.username = "Tên không được để trống";
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      errors.email = "Email không hợp lệ";
+      isValid = false;
+    }
+
+    if (formData.password.length < 6) {
+      errors.password = "Mật khẩu phải có ít nhất 6 ký tự";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
   const handleChange = (e: any) => {
     setFormData({
       ...formData,
@@ -24,6 +55,11 @@ export default function AddUser() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
+
     // mã hóa mật khẩu
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(formData.password, salt);
@@ -42,7 +78,7 @@ export default function AddUser() {
           email: "",
           password: "",
           role: 0,
-          status: 0,
+          status: 1,
         });
         setTimeout(() => setShowSuccessMessage(false), 2000);
       }
@@ -70,6 +106,11 @@ export default function AddUser() {
           value={formData.username}
           onChange={handleChange}
         />
+        {formErrors.username && (
+          <div className="error-message">
+            <p>{formErrors.username}</p>
+          </div>
+        )}
         <input
           type="email"
           name="email"
@@ -77,6 +118,11 @@ export default function AddUser() {
           value={formData.email}
           onChange={handleChange}
         />
+        {formErrors.email && (
+          <div className="error-message">
+            <p>{formErrors.email}</p>
+          </div>
+        )}
         <input
           type="password"
           name="password"
@@ -84,9 +130,12 @@ export default function AddUser() {
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Đang thêm..." : "Thêm"}
-        </button>
+        {formErrors.password && (
+          <div className="error-message">
+            <p>{formErrors.password}</p>
+          </div>
+        )}
+        <button type="submit">Thêm</button>
       </form>
     </div>
   );

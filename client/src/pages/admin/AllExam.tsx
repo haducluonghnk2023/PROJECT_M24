@@ -1,18 +1,35 @@
-import React, { useEffect, useState } from "react";
-import "../../styles/allCourse.css";
+import { useEffect } from "react";
+import "../../styles/allCourse.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { fecthCourses } from "../../service/course.servce";
+import { fetchCourses } from "../../service/course.servce";
+import { deleteCourse } from "../../store/reducers/courseReducer";
 
 export default function AllExam() {
   const dispatch: AppDispatch = useDispatch();
-  const course = useSelector((state: RootState) => state.admin.courses);
+  const courses = useSelector((state: RootState) => state.courses.courses);
+  // console.log(courses);
 
   useEffect(() => {
-    dispatch(fecthCourses());
+    dispatch(fetchCourses());
   }, [dispatch]);
 
+  const handleDelete = async (courseId: string) => {
+    const confirmDelete = window.confirm("Bạn có chắc muốn xóa khóa học này?");
+    if (confirmDelete) {
+      try {
+        const response = await dispatch(deleteCourse(courseId));
+        console.log("Xóa thành công:", response);
+      } catch (error) {
+        console.error("Xóa không thành công:", error);
+      }
+    }
+  };
+
+  const handleEdit = async () => {
+    console.log("edit");
+  };
   return (
     <div className="table-container">
       <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
@@ -25,14 +42,24 @@ export default function AllExam() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Khóa luyen thi toan</td>
-            <td>aa</td>
-            <td>
-              <button className="btn-edit">Sửa</button>
-              <button className="btn-delete">Xóa</button>
-            </td>
-          </tr>
+          {courses.map((course: any) => (
+            <tr key={course.id}>
+              <td>{course.title}</td>
+              <td>{course.description}</td>
+
+              <td>
+                <button onClick={() => handleEdit} className="btn-edit">
+                  Sửa
+                </button>
+                <button
+                  onClick={() => handleDelete(course.id)}
+                  className="btn-delete"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -2,11 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
-
-interface LoginForm {
-  email: string;
-  password: string;
-}
+import { LoginForm } from "../../store/interface/interface";
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,21 +38,21 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
 
-    if (e.target.name === "email") {
-      const email = e.target.value;
-      const response = await axios.get(
-        `http://localhost:8080/users?email_like=${email}`
-      );
+    // if (e.target.name === "email") {
+    //   const email = e.target.value;
+    //   const response = await axios.get(
+    //     `http://localhost:8080/users?email_like=${email}`
+    //   );
 
-      for (let i = 0; i < response.data.length; i++) {
-        if (response.data[i].email === email) {
-          const password = response.data[i].password;
-          // console.log(password);
-        }
-      }
-      // console.log(response.data.length);
-      // console.log(email);
-    }
+    //   for (let i = 0; i < response.data.length; i++) {
+    //     if (response.data[i].email === email) {
+    //       const password = response.data[i].password;
+    //       // console.log(password);
+    //     }
+    //   }
+    //   // console.log(response.data.length);
+    //   // console.log(email);
+    // }
     // console.log(e.target.value);
   };
   const handleChangePassword = async (e: any) => {
@@ -82,9 +78,9 @@ export default function Login() {
             formData.password,
             user.password
           );
-          console.log(formData.password);
-          console.log(user.password);
-          console.log(passwordMatch);
+          // console.log(formData.password);
+          // console.log(user.password);
+          // console.log(passwordMatch);
 
           if (passwordMatch) {
             console.log("Đăng nhập thành công:", user);

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "../../styles/allSubject.css";
+import { useEffect } from "react";
+import "../../styles/allSubject.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";

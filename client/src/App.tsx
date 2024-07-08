@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Admin from "./pages/admin/Admin";
 import DashBoard from "./pages/admin/DashBoard";
 import AllUser from "./pages/admin/AllUser";
-import AddExam from "./pages/admin/AddExam";
+import AddExam from "./pages/admin/AddCourses";
 import AllExam from "./pages/admin/AllExam";
 import AddSubject from "./pages/admin/AddSubject";
 import AllSubject from "./pages/admin/AllSubject";

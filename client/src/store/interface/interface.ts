@@ -8,7 +8,6 @@
     status: number;
   }
   
-  
   export interface AdminState {
     users: User[];
     loading: boolean;
@@ -18,4 +17,16 @@
     id: number;
     title: string;
     description: string;
+  }
+  export interface FormData {
+    email: string;
+    username: string;
+    password: string;
+    repassword: string;
+    role: string;
+    status: number;
+  }
+  export interface LoginForm {
+    email: string;
+    password: string;
   }

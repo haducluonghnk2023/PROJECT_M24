@@ -1,15 +1,18 @@
-.ant-layout{
+.ant-layout {
     min-height: 100vh;
-}
-.ant-layout-sider{
-    min-width: 350px !important; 
+  }
+  
+  .ant-layout-sider {
+    min-width: 350px !important;
     max-width: 350px !important;
     width: 350px !important;
     flex: 0 0 350px !important;
-}
-.ant-layout-sider-collapsed{
+  }
+  
+  .ant-layout-sider-collapsed {
     flex: 0 0 80px !important;
-    min-width: 80px !important; 
+    min-width: 80px !important;
     max-width: 80px !important;
     width: 80px !important;
-}
+  }
+  

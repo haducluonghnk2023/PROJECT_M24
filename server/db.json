@@ -6,66 +6,45 @@
       "password": "123",
       "email": "admin@gmail.com",
       "role": 1,
-      "status": 0
-    },
-    {
-      "id": 2,
-      "username": "user",
-      "password": "123",
-      "email": "user@gmail.com",
-      "role": 0,
-      "status": 0
-    },
-    {
-      "username": "haducluong",
-      "email": "haducluongdz@gmail.com",
-      "password": "$2a$10$8Gmqin.tfsHSUq36BL3h7.uyCS.EwfwGuFejfNm.Y5S/cf7lnSnWO",
-      "role": 0,
-      "status": 0,
-      "id": 3
+      "status": 1
     },
     {
       "username": "phamvan minh",
       "email": "pvm@gmail.com",
       "password": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "role": 0,
-      "status": 0,
+      "status": 1,
       "repassword": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "id": 4
+    },
+    {
+      "email": "a@gmail.com",
+      "username": "haducluong",
+      "password": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
+      "repassword": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
+      "role": "user",
+      "status": 1,
+      "id": 5
     }
   ],
   "courses": [
     {
-      "id": 15,
-      "title": "Khóa luyện thi đại học",
-      "description": "Khóa luyện thi cho học sinh chuẩn bị thi đại học"
-    },
-    {
-      "id": 15,
+      "id": 20,
       "title": "Khóa luyện thi THPT",
       "description": "Khóa luyện thi dành cho học sinh lớp 10,11,12"
-    }
-  ],
-  "examSubject": [
-    {
-      "id": 1,
-      "courseId": 1,
-      "title": "Môn Toán",
-      "description": "Luyện thi đại học môn Toán học"
     },
     {
-      "id": 2,
-      "courseId": 2,
-      "title": "Vật lí lớp 11",
-      "description": "Luyện thi Vật lí lớp 11"
+      "title": "Khóa luyện thi cấp 2",
+      "description": "Khóa luyện thi dành cho học sinh lớp 9",
+      "id": 21
     },
     {
-      "id": 2,
-      "courseId": 2,
-      "title": "Hóa học",
-      "description": "Luyện thi Hóa học lớp 10"
+      "title": "Khóa luyện thi đại học",
+      "description": "Thi đại học dành cho học sinh lớp 12",
+      "id": 22
     }
   ],
+  "examSubject": [],
   "test": [
     {
       "id": 1,
@@ -124,12 +103,6 @@
       "userId": 1,
       "examId": 1,
       "score": 15
-    },
-    {
-      "id": 2,
-      "userId": 2,
-      "examId": 2,
-      "score": 8
     }
   ],
   "comments": [
