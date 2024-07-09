@@ -18,6 +18,11 @@ export default function AllExam() {
   // console.log(courses);
   // console.log(currentCourse);
 
+  const [formErrors, setFormErrors] = useState({
+    title: "",
+    description: "",
+  });
+
   useEffect(() => {
     dispatch(fetchCourses());
   }, [dispatch]);
@@ -47,8 +52,25 @@ export default function AllExam() {
     });
   };
 
+  const validate = () => {
+    const errors: any = {};
+    if (!currentCourse.title.trim()) {
+      errors.title = "Vui lòng nhập tên khóa học";
+    }
+    if (!currentCourse.description.trim()) {
+      errors.description = "Vui lòng nhập mô tả khóa học";
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
+
     try {
       const response = await dispatch(updateCourse(currentCourse));
       console.log("Cập nhật thành công:", response);
@@ -101,6 +123,9 @@ export default function AllExam() {
               onChange={handleInputChange}
               placeholder="Tên khóa học"
             />
+            {formErrors.title && (
+              <p className="error-message">{formErrors.title}</p>
+            )}
             <input
               type="text"
               name="description"
@@ -108,6 +133,9 @@ export default function AllExam() {
               onChange={handleInputChange}
               placeholder="Mô tả"
             />
+            {formErrors.description && (
+              <p className="error-message">{formErrors.description}</p>
+            )}
             <button type="submit">Cập nhật</button>
             <button onClick={() => setEditMode(false)}>Hủy</button>
           </form>

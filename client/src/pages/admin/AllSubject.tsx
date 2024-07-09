@@ -17,6 +17,10 @@ export default function AllSubject() {
     title: "",
     description: "",
   });
+  const [formErrors, setFormErrors] = useState({
+    title: "",
+    description: "",
+  });
   const subject = useSelector(
     (state: RootState) => state.addSubject.examSubject
   );
@@ -53,8 +57,25 @@ export default function AllSubject() {
     });
   };
 
+  const validate = () => {
+    const errors: any = {};
+    if (!currentSubject.title.trim()) {
+      errors.title = "Vui lòng nhập tên khóa học";
+    }
+    if (!currentSubject.description.trim()) {
+      errors.description = "Vui lòng nhập mô tả khóa học";
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
+
     try {
       const response = await dispatch(updateSubject(currentSubject));
       console.log("Cập nhật thành công:", response);
@@ -99,7 +120,7 @@ export default function AllSubject() {
       {editMode && (
         <div className="edit-form">
           <h3>Sửa thông tin khóa học</h3>
-          <form onChange={handleUpdate}>
+          <form onSubmit={handleUpdate}>
             <input
               onChange={handleInputChange}
               value={currentSubject.title}
@@ -107,6 +128,10 @@ export default function AllSubject() {
               name="title"
               placeholder="Tên khóa học"
             />
+            {formErrors.title && (
+              <p className="error-message">{formErrors.title}</p>
+            )}
+
             <input
               onChange={handleInputChange}
               value={currentSubject.description}
@@ -114,6 +139,9 @@ export default function AllSubject() {
               name="description"
               placeholder="Mô tả"
             />
+            {formErrors.description && (
+              <p className="error-message">{formErrors.description}</p>
+            )}
             <button type="submit">Cập nhật</button>
             <button onClick={() => setEditMode(false)}>Hủy</button>
           </form>
