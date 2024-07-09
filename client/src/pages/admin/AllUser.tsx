@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../../styles/allUser.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -8,8 +8,6 @@ import { User } from "../../store/interface/interface";
 export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
   const users = useSelector((state: RootState) => state.admin.users);
-  // const [searchName, setSearchName] = useState("");
-  console.log(users);
 
   useEffect(() => {
     dispatch(fetchUsers());

@@ -25,6 +25,15 @@
       "role": "user",
       "status": 1,
       "id": 5
+    },
+    {
+      "username": "haducluong",
+      "email": "haducluongdz@gmail.com",
+      "password": "$2a$10$zxojYDlpyEJYpARDYbHheee.HDYF/GA6U4/Lhdv3gDFt1JhbjP9B.",
+      "role": 0,
+      "status": 1,
+      "repassword": "$2a$10$zxojYDlpyEJYpARDYbHheee.HDYF/GA6U4/Lhdv3gDFt1JhbjP9B.",
+      "id": 6
     }
   ],
   "courses": [
@@ -37,14 +46,28 @@
       "title": "Khóa luyện thi cấp 2",
       "description": "Khóa luyện thi dành cho học sinh lớp 9",
       "id": 21
-    },
-    {
-      "title": "Khóa luyện thi đại học",
-      "description": "Thi đại học dành cho học sinh lớp 12",
-      "id": 22
     }
   ],
-  "examSubject": [],
+  "examSubject": [
+    {
+      "id": 21,
+      "title": "Vật lí  lớp 11",
+      "description": "Luyện thi vật lí lớp 11",
+      "courseId": 21
+    },
+    {
+      "id": 22,
+      "title": "Hóa học lớp 10",
+      "description": "Luyện thi hóa học lớp 10",
+      "courseId": 22
+    },
+    {
+      "id": 23,
+      "title": "Toán học lớp 12",
+      "description": "Luyện thi toán học lớp 12",
+      "courseId": 23
+    }
+  ],
   "test": [
     {
       "id": 1,
@@ -56,7 +79,7 @@
     },
     {
       "id": 2,
-      "lesson_id": "20",
+      "lesson_id": "29",
       "title": "Đề thi Vật lí cơ bản lớp 11",
       "description": "Đề thi gồm các câu hỏi cơ bản về vật lí lớp 11",
       "duration": 60,
@@ -64,7 +87,7 @@
     },
     {
       "id": 3,
-      "lesson_id": "20",
+      "lesson_id": "30",
       "title": "Đề thi hóa học cơ bản lớp 10",
       "description": "Đề thi gồm các câu hỏi cơ bản về hóa học lớp 10",
       "duration": "",
@@ -74,7 +97,7 @@
   "questions": [
     {
       "id": 1,
-      "questions": "phương trình có nghiệm x=?",
+      "question": "phương trình có nghiệm x=? x^2 - 2x +",
       "answer": "1",
       "examId": 1,
       "option": [
@@ -86,7 +109,7 @@
     },
     {
       "id": 2,
-      "questions": "Định lí pytago áp dụng cho tam giác nào",
+      "question": "Định lí pytago áp dụng cho tam giác nào",
       "answer": "tam giác vuông",
       "examId": 2,
       "option": [

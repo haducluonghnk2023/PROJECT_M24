@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import { deleteCourseService, fetchCourses } from "../../service/course.servce";
 import axios from "axios";
 
@@ -25,6 +24,21 @@ export const deleteCourse:any = createAsyncThunk(
         await deleteCourseService(courseId);
         return courseId;
       } catch (error:any) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  export const updateCourse:any = createAsyncThunk(
+    "courses/updateCourse",
+    async (courseData: any, { rejectWithValue }) => {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/courses/${courseData.id}`,
+          courseData
+        );
+        return response.data;
+      } catch (error: any) {
         return rejectWithValue(error.response.data);
       }
     }
@@ -74,8 +88,20 @@ const coursesSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Không thể xóa khóa học";
       })
-     
-
+      .addCase(updateCourse.pending, (state) => {
+        state.err = null;
+      })
+      .addCase(updateCourse.fulfilled, (state, action) => {
+        const index = state.courses.findIndex((course: any) => course.id === action.payload.id);
+        
+        
+        if (index !== -1) {
+          state.courses[index] = action.payload;
+        }
+      })
+      .addCase(updateCourse.rejected, (state, action) => {
+        state.err = action.payload;
+      })
   },
 });
 export const courseReducer = coursesSlice.reducer;

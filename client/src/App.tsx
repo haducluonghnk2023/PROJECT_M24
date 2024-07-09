@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Admin from "./pages/admin/Admin";
 import DashBoard from "./pages/admin/DashBoard";
 import AllUser from "./pages/admin/AllUser";
-import AddExam from "./pages/admin/AddCourses";
-import AllExam from "./pages/admin/AllExam";
+import AddCourse from "./pages/admin/AddCourses";
+import AllCourse from "./pages/admin/AllCourses";
 import AddSubject from "./pages/admin/AddSubject";
 import AllSubject from "./pages/admin/AllSubject";
 import Register from "./pages/admin/Register";
@@ -23,8 +23,8 @@ export default function App() {
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="all-user" element={<AllUser />} />
-          <Route path="add-exam" element={<AddExam />} />
-          <Route path="all-exam" element={<AllExam />} />
+          <Route path="add-course" element={<AddCourse />} />
+          <Route path="all-course" element={<AllCourse />} />
           <Route path="add-subject" element={<AddSubject />} />
           <Route path="all-subject" element={<AllSubject />} />
           <Route path="add-user" element={<AddUser />} />

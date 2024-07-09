@@ -81,17 +81,17 @@ export default function Admin() {
               ],
             },
             {
-              key: "exam",
+              key: "courses",
               icon: <MdOutlineMenuOpen />,
               label: "Quản lí khóa luyện thi",
               children: [
                 {
-                  key: "add-exam",
+                  key: "add-course",
                   label: "Thêm mới khóa luyện thi",
                   icon: <UploadOutlined />,
                 },
                 {
-                  key: "all-exam",
+                  key: "all-course",
                   label: "Tất cả khóa luyện thi",
                   icon: <MdOutlineAlignHorizontalLeft />,
                 },

@@ -7,20 +7,26 @@ export const fetchCourses :any = createAsyncThunk<any>(
     async ()=>{
       const res = await axios.get("http://localhost:8080/courses");
       // console.log(res);
-      
       return res.data;
     }
+)
+
+export const fetchQuestion:any = createAsyncThunk<any>("admin/fecthQuestion",
+  async ()=>{
+    const res = await axios.get("http://localhost:8080/questions");
+    // console.log(res);
+    return res.data;
+  }
 )
 
 export const fetchTest:any = createAsyncThunk<any>("admin/fetchTest",
   async ()=>{
     const res = await axios.get("http://localhost:8080/test");
-    console.log(res);
+    // console.log(res);
     return res.data;
   }
 )
 
-// hoạt động  bất đồng bộ
 export const fetchUsers:any = createAsyncThunk<User[]>(
   "admin/fetchUsers",
   async () => {
@@ -40,24 +46,54 @@ export const updateUserStatus:any = createAsyncThunk<
   return response.data;
 });
 
-// export const researchUser:any = createAsyncThunk<User[], string>(
-//   "admin/researchUser",
-//   async (name) => {
-//     const response = await axios.get(`http://localhost:8080/users?username_like=${name}`);
-//     return response.data;
-//   }
-// );
-// course.service.ts
-
-
 export const deleteCourseService = async (courseId:any) => {
   try {
-    const response = await axios.delete(`http://localhost:8080/courses/${courseId}`);
+    const response = await axios.delete(`http://localhost:8080/examSubject/${courseId}`);
     return response.data;
   } catch (error) {
     throw new Error("không thể xóa khóa học");
   }
 };
+
+export const deleteSubjectService = async (subjectId:any) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/examSubject/${subjectId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("không thể xóa môn học");
+  }
+}
+
+export const fetchExamSubject: any = createAsyncThunk<any>(
+  "admin/fetchExamSubject",
+  async () => {
+    const res = await axios.get("http://localhost:8080/examSubject");
+    return res.data;
+  }
+);
+
+export const addSubject:any = createAsyncThunk(
+  "subjects/addSubject",
+  async (newCourse, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("http://localhost:8080/examSubject", newCourse);
+      return response.data;
+    } catch (error:any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const addTest:any = createAsyncThunk("test/addTest", async (newTest,{ rejectWithValue}) => {
+  try {
+    const response = await axios.post("http://localhost:8080/test", newTest);
+    return response.data;
+  }
+  catch (error:any) {
+    return rejectWithValue(error.response.data);
+  }
+})
+
 
 
 

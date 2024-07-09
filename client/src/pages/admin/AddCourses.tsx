@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import "../../styles/addCourse.scss";
 import { addCourse } from "../../store/reducers/courseReducer";
 
@@ -48,7 +47,7 @@ export default function AddCourses() {
           description: "",
         });
       } catch (error) {
-        console.error("Failed to add course: ", error);
+        console.error("không thể thêm khóa học: ", error);
       }
     }
   };
