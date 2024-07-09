@@ -87,7 +87,6 @@ export default function AllSubject() {
 
   return (
     <div className="table-container">
-      <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
       <table className="subject-table">
         <thead>
           <tr>

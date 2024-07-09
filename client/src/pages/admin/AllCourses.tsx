@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { fetchCourses } from "../../service/course.servce";
+
 import { deleteCourse, updateCourse } from "../../store/reducers/courseReducer";
 import "../../styles/allCourse.scss";
 import "../../styles/courseReducer.scss";
+import { fetchCourses } from "../../service/course.servce";
 
-export default function AllExam() {
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export default function AllCourse() {
   const dispatch: AppDispatch = useDispatch();
   const courses = useSelector((state: RootState) => state.courses.courses);
   const [editMode, setEditMode] = useState(false);
-  const [currentCourse, setCurrentCourse] = useState<any>({
+  const [currentCourse, setCurrentCourse] = useState<Course>({
     id: "",
     title: "",
     description: "",
   });
-  // console.log(courses);
-  // console.log(currentCourse);
 
   const [formErrors, setFormErrors] = useState({
     title: "",
@@ -39,7 +44,7 @@ export default function AllExam() {
     }
   };
 
-  const handleEdit = (course: any) => {
+  const handleEdit = (course: Course) => {
     setEditMode(true);
     setCurrentCourse(course);
   };
@@ -80,9 +85,9 @@ export default function AllExam() {
       console.error("Cập nhật không thành công:", error);
     }
   };
+
   return (
     <div className="table-container">
-      <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
       <table className="courses-table">
         <thead>
           <tr>
@@ -92,24 +97,32 @@ export default function AllExam() {
           </tr>
         </thead>
         <tbody>
-          {courses.map((course: any) => (
-            <tr key={course.id}>
-              <td>{course.title}</td>
-              <td>{course.description}</td>
-
-              <td>
-                <button onClick={() => handleEdit(course)} className="btn-edit">
-                  Sửa
-                </button>
-                <button
-                  onClick={() => handleDelete(course.id)}
-                  className="btn-delete"
-                >
-                  Xóa
-                </button>
-              </td>
+          {courses && courses.length > 0 ? (
+            courses.map((course: Course) => (
+              <tr key={course.id}>
+                <td>{course.title}</td>
+                <td>{course.description}</td>
+                <td>
+                  <button
+                    onClick={() => handleEdit(course)}
+                    className="btn-edit"
+                  >
+                    Sửa
+                  </button>
+                  <button
+                    onClick={() => handleDelete(course.id)}
+                    className="btn-delete"
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3}>Không tìm thấy dữ liệu</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
       {editMode && (

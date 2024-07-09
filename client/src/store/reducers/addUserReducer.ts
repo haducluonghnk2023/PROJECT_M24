@@ -1,7 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { addUser } from '../../service/course.servce';
-
+import { createSlice } from "@reduxjs/toolkit";
+import { addUser } from "../../service/course.servce";
 
 const initialState = {
   users: [],
@@ -9,21 +7,21 @@ const initialState = {
   error: null,
 };
 
-const addUserSlice:any = createSlice({
-  name: 'addUser',
+const addUserSlice: any = createSlice({
+  name: "addUser",
   initialState,
   reducers: {},
-  extraReducers: (builder:any) => {
+  extraReducers: (builder: any) => {
     builder
-      .addCase(addUser.pending, (state:any) => {
+      .addCase(addUser.pending, (state: any) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(addUser.fulfilled, (state:any, action:any) => {
+      .addCase(addUser.fulfilled, (state: any, action: any) => {
         state.loading = false;
         state.users.push(action.payload);
       })
-      .addCase(addUser.rejected, (state:any, action:any) => {
+      .addCase(addUser.rejected, (state: any, action: any) => {
         state.loading = false;
         state.error = action.payload;
       });

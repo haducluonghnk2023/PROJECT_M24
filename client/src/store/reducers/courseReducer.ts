@@ -17,39 +17,37 @@ export const addCourse: any = createAsyncThunk(
   }
 );
 
-export const deleteCourse:any = createAsyncThunk(
-    "courses/deleteCourse",
-    async (courseId, { rejectWithValue }) => {
-      try {
-        await deleteCourseService(courseId);
-        return courseId;
-      } catch (error:any) {
-        return rejectWithValue(error.response.data);
-      }
+export const deleteCourse: any = createAsyncThunk(
+  "courses/deleteCourse",
+  async (courseId, { rejectWithValue }) => {
+    try {
+      await deleteCourseService(courseId);
+      return courseId;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
 
-  export const updateCourse:any = createAsyncThunk(
-    "courses/updateCourse",
-    async (courseData: any, { rejectWithValue }) => {
-      try {
-        const response = await axios.put(
-          `http://localhost:8080/courses/${courseData.id}`,
-          courseData
-        );
-        return response.data;
-      } catch (error: any) {
-        return rejectWithValue(error.response.data);
-      }
+export const updateCourse: any = createAsyncThunk(
+  "courses/updateCourse",
+  async (courseData: any, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/courses/${courseData.id}`,
+        courseData
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
     }
-  );
-  
-
+  }
+);
 
 const initialState: any = {
   courses: [],
   err: null,
-  loading: false
+  loading: false,
 };
 
 const coursesSlice = createSlice({
@@ -64,7 +62,7 @@ const coursesSlice = createSlice({
       .addCase(fetchCourses.fulfilled, (state, action) => {
         state.courses = action.payload;
       })
-      .addCase(fetchCourses.rejected, (state, action) => {  
+      .addCase(fetchCourses.rejected, (state, action) => {
         state.err = action.err.message || "không tìm được người dùng";
       })
       .addCase(addCourse.pending, (state) => {
@@ -76,15 +74,17 @@ const coursesSlice = createSlice({
       .addCase(addCourse.rejected, (state, action) => {
         state.err = action.payload;
       })
-      .addCase(deleteCourse.pending, (state:any) => {
+      .addCase(deleteCourse.pending, (state: any) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteCourse.fulfilled, (state:any, action:any) => {
+      .addCase(deleteCourse.fulfilled, (state: any, action: any) => {
         state.loading = false;
-        state.courses = state.courses.filter((course:any) => course.id !== action.payload);
+        state.courses = state.courses.filter(
+          (course: any) => course.id !== action.payload
+        );
       })
-      .addCase(deleteCourse.rejected, (state:any, action:any) => {
+      .addCase(deleteCourse.rejected, (state: any, action: any) => {
         state.loading = false;
         state.error = action.error.message || "Không thể xóa khóa học";
       })
@@ -92,16 +92,17 @@ const coursesSlice = createSlice({
         state.err = null;
       })
       .addCase(updateCourse.fulfilled, (state, action) => {
-        const index = state.courses.findIndex((course: any) => course.id === action.payload.id);
-        
-        
+        const index = state.courses.findIndex(
+          (course: any) => course.id === action.payload.id
+        );
+
         if (index !== -1) {
           state.courses[index] = action.payload;
         }
       })
       .addCase(updateCourse.rejected, (state, action) => {
         state.err = action.payload;
-      })
+      });
   },
 });
 export const courseReducer = coursesSlice.reducer;

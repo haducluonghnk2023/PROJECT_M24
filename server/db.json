@@ -39,7 +39,7 @@
   "courses": [
     {
       "id": 20,
-      "title": "Khóa luyện thi THPT",
+      "title": "Khóa luyện thi THPT1",
       "description": "Khóa luyện thi dành cho học sinh lớp 10,11,12"
     },
     {
@@ -57,15 +57,9 @@
     },
     {
       "id": 22,
-      "title": "Hóa học lớp 10",
-      "description": "Luyện thi hóa học lớp 10",
-      "courseId": 22
-    },
-    {
-      "id": 23,
-      "title": "Toán học lớp 12",
-      "description": "Luyện thi toán học lớp 12",
-      "courseId": 23
+      "title": "Hóa học lớp 11",
+      "description": "Luyện thi Hóa học lớp 11",
+      "courseId": 21
     }
   ],
   "test": [

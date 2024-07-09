@@ -48,7 +48,7 @@ export const updateUserStatus:any = createAsyncThunk<
 
 export const deleteCourseService = async (courseId:any) => {
   try {
-    const response = await axios.delete(`http://localhost:8080/examSubject/${courseId}`);
+    const response = await axios.delete(`http://localhost:8080/courses/${courseId}`);
     return response.data;
   } catch (error) {
     throw new Error("không thể xóa khóa học");

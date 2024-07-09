@@ -83,7 +83,6 @@ export default function AllSubject() {
 
   return (
     <div className="table-container">
-      <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
       <table className="subject-table">
         <thead>
           <tr>
@@ -129,6 +128,9 @@ export default function AllSubject() {
               name="question"
               placeholder="Câu hỏi"
             />
+            {formErrors.question && (
+              <p className="error-message">{formErrors.question}</p>
+            )}
 
             <input
               onChange={handleInputChange}
@@ -137,6 +139,9 @@ export default function AllSubject() {
               name="answer"
               placeholder="Đáp án"
             />
+            {formErrors.answer && (
+              <p className="error-message">{formErrors.answer}</p>
+            )}
 
             <button type="submit">Cập nhật</button>
             <button onClick={() => setEditMode(false)}>Hủy</button>
