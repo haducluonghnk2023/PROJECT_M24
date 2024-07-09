@@ -1,65 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
-  deleteSubjectService,
+  deleteSubject,
   fetchExamSubject,
+  updateSubject,
 } from "../../service/course.servce";
-import axios from "axios";
 
 const initialState: any = {
   examSubject: [],
   error: null,
 };
-
-export const deleteSubject: any = createAsyncThunk(
-  "subject/deleteSubject",
-  async (subjectId, { rejectWithValue }) => {
-    try {
-      await deleteSubjectService(subjectId);
-      return subjectId;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const updateSubject: any = createAsyncThunk(
-  "courses/updateCourse",
-  async (subjectData: any, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/examSubject/${subjectData.id}`,
-        subjectData
-      );
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const deleteTest: any = createAsyncThunk(
-  "tests/deleteTest",
-  async (testId, { rejectWithValue }) => {
-    try {
-      await axios.delete(`http://localhost:8080/test/${testId}`);
-      return testId;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const updateTest: any = createAsyncThunk(
-  "test,updateTest",
-  async (testData: any, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(`http://localhost:8080/test/${testData.id}`, testData);
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 const adminSlice = createSlice({
   name: "admin",

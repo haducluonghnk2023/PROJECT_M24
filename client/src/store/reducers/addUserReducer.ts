@@ -1,17 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { addUser } from '../../service/course.servce';
 
-export const addUser:any = createAsyncThunk(
-  'addUser/addUser',
-  async (userData, { rejectWithValue }) => {
-    try {
-      const response = await axios.post('http://localhost:8080/users', userData);
-      return response.data;
-    } catch (error:any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 const initialState = {
   users: [],

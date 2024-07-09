@@ -42,7 +42,7 @@ export const updateUserStatus:any = createAsyncThunk<
   const response = await axios.patch(`http://localhost:8080/users/${userId}`, {
     status,
   });
-  console.log(response);
+  // console.log(response);
   return response.data;
 });
 
@@ -54,6 +54,16 @@ export const deleteCourseService = async (courseId:any) => {
     throw new Error("không thể xóa khóa học");
   }
 };
+
+export const deleteQuestionService = async (questionId:any) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/questions/${questionId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("không thể xóa khóa học");
+  }
+};
+
 
 export const deleteSubjectService = async (subjectId:any) => {
   try {
@@ -93,6 +103,83 @@ export const addTest:any = createAsyncThunk("test/addTest", async (newTest,{ rej
     return rejectWithValue(error.response.data);
   }
 })
+
+export const addQuestion:any = createAsyncThunk("question/addQuestion", async (newQuestion,{rejectWithValue})=>{
+  try {
+    const res = await axios.post("http://localhost:8080/questions",newQuestion);
+    return res.data;
+  }
+  catch (error:any) {
+   return rejectWithValue(error.response.data);
+  }
+})
+
+
+export const addUser:any = createAsyncThunk(
+  'addUser/addUser',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('http://localhost:8080/users', userData);
+      return response.data;
+    } catch (error:any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateQuestion: any = createAsyncThunk(
+  "question/updateQuestion",
+  async (questionData: any, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/questions/${questionData.id}`,
+        questionData
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteQuestion: any = createAsyncThunk(
+  "question/deleteQuestion",
+  async (questionId, { rejectWithValue }) => {
+    try {
+      await deleteQuestionService(questionId);
+      return questionId;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteSubject: any = createAsyncThunk(
+  "subject/deleteSubject",
+  async (subjectId, { rejectWithValue }) => {
+    try {
+      await deleteSubjectService(subjectId);
+      return subjectId;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateSubject: any = createAsyncThunk(
+  "courses/updateCourse",
+  async (subjectData: any, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/examSubject/${subjectData.id}`,
+        subjectData
+      );
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 

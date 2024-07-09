@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import bcrypt from "bcryptjs";
 import "../../styles/addUser.scss";
-import { addUser } from "../../store/reducers/addUserReducer";
+import { addUser } from "../../service/course.servce";
 
 export default function AddUser() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);

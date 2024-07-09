@@ -3,7 +3,7 @@ export interface User {
   username: string;
   email: string;
   birthdate: string;
-  role: string;
+  role: number;
   status: number;
 }
 
@@ -22,7 +22,7 @@ export interface FormData {
   username: string;
   password: string;
   repassword: string;
-  role: string;
+  role: number | string;
   status: number;
 }
 export interface LoginForm {

@@ -22,7 +22,7 @@
       "username": "haducluong",
       "password": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
       "repassword": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
-      "role": "user",
+      "role": 0,
       "status": 1,
       "id": 5
     },
@@ -51,7 +51,7 @@
   "examSubject": [
     {
       "id": 21,
-      "title": "Vật lí  lớp 11",
+      "title": "Vật lí lớp 11",
       "description": "Luyện thi vật lí lớp 11",
       "courseId": 21
     },
@@ -72,8 +72,8 @@
     {
       "id": 1,
       "lesson_id": "20",
-      "title": "Toán",
-      "description": "Đề thi toán học THPT Chuyên Hùng Vương",
+      "title": "Đề thi toán học THPT Chuyên Hùng Vương",
+      "description": "Đề thi toán năm 2024",
       "duration": 90,
       "examSubjectId": 1
     },
@@ -97,7 +97,7 @@
   "questions": [
     {
       "id": 1,
-      "question": "phương trình có nghiệm x=? x^2 - 2x +",
+      "question": "phương trình có nghiệm x=? x^2 - 2x +1 = 0",
       "answer": "1",
       "examId": 1,
       "option": [

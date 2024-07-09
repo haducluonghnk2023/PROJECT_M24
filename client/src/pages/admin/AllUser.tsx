@@ -26,9 +26,9 @@ export default function AllUser() {
     <div className="table-container">
       <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
       <select name="" id="">
-        <option value="">Sắp xếp theo:</option>
-        <option value="">Tên</option>
-        <option value="">Email</option>
+        <option value="">Sắp xếp :</option>
+        <option value="">Tăng dần</option>
+        <option value="">Giảm dần</option>
       </select>
       <table className="user-table">
         <thead>
@@ -44,12 +44,34 @@ export default function AllUser() {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>
-                <button
-                  className="btn-lock"
-                  onClick={() => toggleUserStatus(user.id)}
-                >
-                  {user.status === 1 ? "Khóa" : "Mở khóa"}
-                </button>
+                {user.status === 1 && user.role === 0 ? (
+                  <button
+                    className="btn-lock"
+                    onClick={() => toggleUserStatus(user.id)}
+                  >
+                    Khóa
+                  </button>
+                ) : (
+                  ""
+                )}
+                {user.status === 0 && user.role === 0 ? (
+                  <button
+                    className="btn-lock"
+                    onClick={() => toggleUserStatus(user.id)}
+                  >
+                    Mở Khóa
+                  </button>
+                ) : (
+                  ""
+                )}
+
+                {user.role == 1 ? (
+                  <button className="btn-lock" disabled>
+                    Disabled
+                  </button>
+                ) : (
+                  ""
+                )}
               </td>
             </tr>
           ))}
