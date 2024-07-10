@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import "../../styles/allUser.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -9,9 +10,14 @@ export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
   const users = useSelector((state: RootState) => state.admin.users);
 
+  const [searchUser, setSearchUser] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const usersPerPage = 2;
+  const [sortBy, setSortBy] = useState("");
+
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    dispatch(fetchUsers({ searchUser }));
+  }, [dispatch, searchUser]);
 
   const toggleUserStatus = (userId: number) => {
     const userToUpdate = users.find((user: User) => user.id === userId);
@@ -22,13 +28,42 @@ export default function AllUser() {
     }
   };
 
+  const sortedUsers = () => {
+    switch (sortBy) {
+      case "increase":
+        return [...users].sort((a, b) => a.username.localeCompare(b.username));
+      case "decrease":
+        return [...users].sort((a, b) => b.username.localeCompare(a.username));
+      default:
+        return users;
+    }
+  };
+
+  const pageCount = Math.ceil(sortedUsers().length / usersPerPage);
+  const offset = currentPage * usersPerPage;
+  const currentUsers = sortedUsers().slice(offset, offset + usersPerPage);
+
+  const handlePageClick = (event: { selected: number }) => {
+    setCurrentPage(event.selected);
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+  };
+
   return (
     <div className="table-container">
-      <input className="int" type="text" placeholder="Nhập tên cần tìm kiếm" />
-      <select name="" id="">
+      <input
+        value={searchUser}
+        onChange={(e) => setSearchUser(e.target.value)}
+        className="int"
+        type="text"
+        placeholder="Nhập tên cần tìm kiếm"
+      />
+      <select name="" id="" onChange={handleSortChange}>
         <option value="">Sắp xếp :</option>
-        <option value="">Tăng dần</option>
-        <option value="">Giảm dần</option>
+        <option value="increase">Tăng dần</option>
+        <option value="decrease">Giảm dần</option>
       </select>
       <table className="user-table">
         <thead>
@@ -39,7 +74,7 @@ export default function AllUser() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user: User) => (
+          {currentUsers.map((user: User) => (
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
@@ -65,7 +100,7 @@ export default function AllUser() {
                   ""
                 )}
 
-                {user.role == 1 ? (
+                {user.role === 1 ? (
                   <button className="btn-lock" disabled>
                     Disabled
                   </button>
@@ -77,6 +112,18 @@ export default function AllUser() {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+        previousLabel={"Trước"}
+        nextLabel={"Sau"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+      />
     </div>
   );
 }

@@ -29,3 +29,6 @@ export interface LoginForm {
   email: string;
   password: string;
 }
+export interface FetchUsersSearch {
+  searchUser: string;
+}

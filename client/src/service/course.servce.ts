@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { User } from "../store/interface/interface";
+import {  FetchUsersSearch, User } from "../store/interface/interface";
 
 export const fetchCourses :any = createAsyncThunk<any>(
     "admin/fetchCourses",
@@ -27,13 +27,15 @@ export const fetchTest:any = createAsyncThunk<any>("admin/fetchTest",
   }
 )
 
-export const fetchUsers:any = createAsyncThunk<User[]>(
+export const fetchUsers:any = createAsyncThunk<User[],FetchUsersSearch>(
   "admin/fetchUsers",
-  async () => {
-    const response = await axios.get("http://localhost:8080/users");
+  async ({searchUser=''}) => {
+    const response = await axios.get<User[]>(`http://localhost:8080/users?username_like=${searchUser}`,{
+    });
     return response.data;
   }
 );
+
 
 export const updateUserStatus:any = createAsyncThunk<
   User,

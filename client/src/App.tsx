@@ -22,7 +22,7 @@ export default function App() {
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/login" element={<Login />}></Route>
 
-        <Route path="/admin/*" element={<Admin />}>
+        <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="all-user" element={<AllUser />} />
           <Route path="add-course" element={<AddCourse />} />
