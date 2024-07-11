@@ -46,25 +46,48 @@
       "title": "Khóa luyện thi cho học sinh giỏi cấp quốc gia",
       "description": "Khóa luyện thi dành cho học sinh lớp 9,12",
       "id": 21
+    },
+    {
+      "title": "Khóa luyện thi IELTS",
+      "description": "Dành cho học sinh từ 700+ TOEIC trở lên",
+      "id": 22
     }
   ],
   "examSubject": [
     {
-      "id": 10,
+      "id": 101,
       "title": "Vật lí lớp 11",
       "description": "Luyện thi vật lí lớp 11",
       "courseId": 20
     },
     {
-      "id": 11,
+      "id": 102,
       "title": "Hóa học lớp 11",
       "description": "Luyện thi Hóa học lớp 11",
-      "courseId": 21
+      "courseId": 20
+    },
+    {
+      "id": 103,
+      "title": "Vật lí lớp 12",
+      "description": "Luyện thi vật lí lớp 12",
+      "courseId": 20
+    },
+    {
+      "id": 104,
+      "title": "Hóa học lớp 12",
+      "description": "Luyện thi Hóa học lớp 12",
+      "courseId": 20
+    },
+    {
+      "id": 105,
+      "title": "Toán học lớp 12",
+      "description": "Luyện thi Toán học lớp 12",
+      "courseId": 20
     }
   ],
   "test": [
     {
-      "id": 1,
+      "id": 1111,
       "lesson_id": "20",
       "title": "Đề thi toán học THPT Chuyên Hùng Vương",
       "description": "Đề thi toán năm 2024",
@@ -76,21 +99,14 @@
       "lesson_id": "29",
       "title": "Đề thi Vật lí cơ bản lớp 11",
       "description": "Đề thi gồm các câu hỏi cơ bản về vật lí lớp 11",
-      "duration": 60,
+      "duration": 50,
       "examSubjectId": 2
-    },
-    {
-      "id": 3,
-      "lesson_id": "30",
-      "title": "Đề thi hóa học cơ bản lớp 10",
-      "description": "Đề thi gồm các câu hỏi cơ bản về hóa học lớp 10",
-      "duration": "",
-      "examSubjectId": 3
     }
   ],
   "questions": [
     {
-      "id": 1,
+      "id": 111111,
+      "testId": 1111,
       "question": "phương trình có nghiệm x=? x^2 - 2x +1 = 0",
       "answer": "1",
       "examId": 1,
@@ -102,7 +118,8 @@
       ]
     },
     {
-      "id": 2,
+      "id": 11111111111,
+      "testId": 1111,
       "question": "Định lí pytago áp dụng cho tam giác nào",
       "answer": "tam giác vuông",
       "examId": 2,

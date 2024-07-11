@@ -1,29 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/admin/addQuestion.scss";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { addQuestion } from "../../service/course.servce";
+import {
+  addQuestion,
+  fetchExamSubject,
+  fetchExamSubjectUser,
+  fetchTest,
+} from "../../service/course.servce";
 
 interface FormData {
   question: string;
   answer: string;
+  testId: number | string;
 }
 
 export default function AddQuestion() {
   const dispatch = useDispatch<AppDispatch>();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
   const [formData, setFormData] = useState<FormData>({
     question: "",
     answer: "",
+    testId: 0,
   });
-
   const [formErrors, setFormErrors] = useState<FormData>({
     question: "",
     answer: "",
+    testId: 0,
   });
 
+  const [questions, setQuestions] = useState<any>([]);
+
+  useEffect(() => {
+    fetchTest();
+  }, []);
+
+  const fetchTest = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/test");
+      if (!response.ok) {
+        throw new Error("Lỗi lấy dữ liệu khóa thi");
+      }
+      const data = await response.json();
+      setQuestions(data);
+    } catch (error) {
+      console.error("Lỗi:", error);
+    }
+  };
   const validate = () => {
     const errors: Partial<FormData> = {};
     if (!formData.question.trim()) {
@@ -31,6 +54,9 @@ export default function AddQuestion() {
     }
     if (!formData.answer.trim()) {
       errors.answer = "Vui lòng nhập đáp án câu hỏi";
+    }
+    if (!formData.testId) {
+      errors.testId = "Vui lòng chọn đề thi";
     }
     setFormErrors(errors as FormData);
     return Object.keys(errors).length === 0;
@@ -45,20 +71,21 @@ export default function AddQuestion() {
     dispatch(addQuestion(formData))
       .then(() => {
         setShowSuccessMessage(true);
-        setFormData({ question: "", answer: "" });
-        setFormErrors({ question: "", answer: "" });
+        setFormData({ question: "", answer: "", testId: 0 });
+        setFormErrors({ question: "", answer: "", testId: 0 });
       })
       .catch((err: any) => {
         console.error("Thêm câu hỏi không thành công:", err);
       });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "testId" ? Number(value) : value,
     });
 
     if (formErrors[name as keyof FormData]) {
@@ -77,7 +104,6 @@ export default function AddQuestion() {
           <p>Thêm câu hỏi thành công!</p>
         </div>
       )}
-
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleInputChange}
@@ -95,6 +121,19 @@ export default function AddQuestion() {
           placeholder="Đáp án"
         />
         {formErrors.answer && <p className="error">{formErrors.answer}</p>}
+        <select
+          name="testId"
+          value={formData.testId}
+          onChange={handleInputChange}
+        >
+          <option value="">Chọn đề thi</option>
+          {questions.map((test: any) => (
+            <option key={test.id} value={test.id}>
+              {test.title}
+            </option>
+          ))}
+        </select>
+        {formErrors.testId && <p className="error">{formErrors.testId}</p>}
         <button type="submit">Thêm</button>
       </form>
     </div>

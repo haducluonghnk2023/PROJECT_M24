@@ -1,36 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/admin/addTest.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTest } from "../../service/course.servce";
+
 interface FormData {
   title: string;
   description: string;
   duration: number;
+  examSubjectId: number;
 }
-export default function AddTest() {
+
+const AddTest: React.FC = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
-    duration: "",
+    duration: 0,
+    examSubjectId: 0,
   });
 
   const [formErrors, setFormErrors] = useState({
     title: "",
     description: "",
     duration: "",
+    examSubjectId: "",
   });
+
+  const [tests, setTests] = useState<any>([]);
+
+  useEffect(() => {
+    fetchExamSubject();
+  }, []);
+
+  const fetchExamSubject = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/examSubject");
+      if (!response.ok) {
+        throw new Error("Lỗi lấy dữ liệu khóa thi");
+      }
+      const data = await response.json();
+      setTests(data);
+    } catch (error) {
+      console.error("Lỗi:", error);
+    }
+  };
   const validate = () => {
     const errors: any = {};
     if (!formData.title.trim()) {
-      errors.title = "Vui lòng nhập tên đề thi ";
+      errors.title = "Vui lòng nhập tên đề thi";
     }
     if (!formData.description.trim()) {
       errors.description = "Vui lòng nhập mô tả đề thi";
     }
     if (!formData.duration) {
       errors.duration = "Vui lòng nhập thời gian thi";
+    }
+    if (!formData.examSubjectId) {
+      errors.examSubjectId = "Vui lòng chọn môn thi";
     }
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -45,20 +72,33 @@ export default function AddTest() {
     dispatch(addTest(formData))
       .then(() => {
         setShowSuccessMessage(true);
-        setFormData({ title: "", description: "", duration: "" });
-        setFormErrors({ title: "", description: "", duration: "" });
+        setFormData({
+          title: "",
+          description: "",
+          duration: 0,
+          examSubjectId: 0,
+        });
+        setFormErrors({
+          title: "",
+          description: "",
+          duration: "",
+          examSubjectId: "",
+        });
       })
       .catch((err: any) => {
         console.error("Thêm đề thi không thành công:", err);
       });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
 
     setFormData({
       ...formData,
-      [name]: name === "duration" ? Number(value) : value,
+      [name]:
+        name === "duration" || name === "examSubjectId" ? Number(value) : value,
     });
 
     if (formErrors[name as keyof FormData]) {
@@ -101,16 +141,33 @@ export default function AddTest() {
         )}
         <input
           onChange={handleInputChange}
-          value={formData.duration}
-          type="text"
+          value={formData.duration.toString()}
+          type="number"
           name="duration"
           placeholder="Thời gian (phút)"
         />
         {formErrors.duration && (
           <p className="error-message">{formErrors.duration}</p>
         )}
+        <select
+          name="examSubjectId"
+          value={formData.examSubjectId}
+          onChange={handleInputChange}
+        >
+          <option value="">Chọn môn thi</option>
+          {tests.map((subject: any) => (
+            <option key={subject.id} value={subject.id}>
+              {subject.title}
+            </option>
+          ))}
+        </select>
+        {formErrors.examSubjectId && (
+          <p className="error-message">{formErrors.examSubjectId}</p>
+        )}
         <button type="submit">Thêm</button>
       </form>
     </div>
   );
-}
+};
+
+export default AddTest;

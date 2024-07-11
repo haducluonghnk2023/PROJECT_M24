@@ -17,7 +17,6 @@ export default function Banner() {
   const handleJoinCourse = (courseId: number) => {
     dispatch(getCourseId(courseId));
     console.log(state);
-
     navigate(`/course/${courseId}`);
     console.log(`${courseId}`);
   };

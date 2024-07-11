@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaRegNoteSticky, FaUsers } from "react-icons/fa6";
 import "../../styles/admin/admin.scss";
@@ -32,6 +32,9 @@ export default function Admin() {
   } = theme.useToken();
 
   const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/admin");
+  }, []);
   return (
     <Layout className="">
       <Sider trigger={null} collapsible collapsed={collapsed}>

@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   deleteSubject,
+  fetchCourses,
   fetchExamSubject,
+  fetchTest,
   updateSubject,
 } from "../../service/course.servce";
 import "../../styles/admin/allSubject.scss";
@@ -29,6 +31,14 @@ export default function AllSubject() {
   useEffect(() => {
     dispatch(fetchExamSubject());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchTest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
   const handleEdit = (subject: any) => {
     // console.log("edit");
