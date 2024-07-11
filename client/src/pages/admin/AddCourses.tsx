@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import "../../styles/addCourse.scss";
-import { addCourse } from "../../store/reducers/courseReducer";
+import "../../styles/admin/addCourse.scss";
+import { addCourse } from "../../service/course.servce";
 
 export default function AddCourses() {
   const dispatch = useDispatch();

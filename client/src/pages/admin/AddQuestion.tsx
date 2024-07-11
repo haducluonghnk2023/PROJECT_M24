@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/addQuestion.scss";
+import "../../styles/admin/addQuestion.scss";
 
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";

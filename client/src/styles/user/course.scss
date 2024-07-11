@@ -1,0 +1,134 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+$font-family: 'Roboto', sans-serif;
+
+// Global Styles
+body {
+  font-family: $font-family;
+  color: $dark-color;
+}
+
+// Header Styles
+.header {
+  background-color: $primary-color;
+  color: $light-color;
+  padding: 1rem 0;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .account-section {
+        display: flex;
+        align-items: center;
+  
+        .account-icon {
+          font-size: 2rem;
+          margin-right: 0.5rem;
+        }
+  
+        .account-text {
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+      }
+
+    .header-link {
+      color: $light-color;
+      text-decoration: none;
+      margin-right: 1rem;
+
+      &:hover {
+        color: darken($light-color, 10%);
+      }
+    }
+
+    .auth-links {
+      display: flex;
+      align-items: center;
+
+      .header-link-divider {
+        margin: 0 0.5rem;
+        color: $light-color;
+      }
+    }
+  }
+}
+.navbar {
+    background-color: $dark-color;
+    color: $light-color;
+    padding: 1rem 0;
+  
+    .navbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+      }
+  
+      .nav-links {
+        list-style-type: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+  
+        li {
+          margin-left: 2rem;
+  
+          a {
+            color: $light-color;
+            text-decoration: none;
+            &:hover {
+              color: lighten($primary-color, 20%);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+.course-detail {
+    padding: 20px;
+    background-color: #f8f9fa;
+    .course-section {
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      p {
+        color: #666;
+        margin-bottom: 15px;
+      }
+      .btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 4px 8px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        margin-top: 10px; 
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import bcrypt from "bcryptjs";
-import "../../styles/addUser.scss";
+import "../../styles/admin/addUser.scss";
 import { addUser } from "../../service/course.servce";
 
 export default function AddUser() {

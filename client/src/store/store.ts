@@ -5,7 +5,8 @@ import addUserReducer from "./reducers/addUserReducer";
 import subjectReducer from "./reducers/subjectReducer";
 import testReducer from "./reducers/testReducer";
 import questionReducer from "./reducers/questionReducer";
-
+import userReducer from "./reducers/userReducer";
+import userSubjectReducer from "./reducers/userSubjectReducer";
 
 const store:any = configureStore({
   reducer: {
@@ -14,7 +15,9 @@ const store:any = configureStore({
     addUser:addUserReducer,
     addSubject:subjectReducer,
     test:testReducer,
-    question:questionReducer
+    question:questionReducer,
+    user:userReducer,
+    examSubject:userSubjectReducer
   },
 });
 

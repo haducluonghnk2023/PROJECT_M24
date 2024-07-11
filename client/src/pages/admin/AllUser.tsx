@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import "../../styles/allUser.scss";
+import "../../styles/admin/allUser.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchUsers, updateUserStatus } from "../../service/course.servce";
@@ -9,10 +9,9 @@ import { User } from "../../store/interface/interface";
 export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
   const users = useSelector((state: RootState) => state.admin.users);
-
   const [searchUser, setSearchUser] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const usersPerPage = 2;
+  const usersPerPage = 3;
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
@@ -99,9 +98,8 @@ export default function AllUser() {
                 ) : (
                   ""
                 )}
-
                 {user.role === 1 ? (
-                  <button className="btn-lock" disabled>
+                  <button className="btn-lock1" disabled>
                     Disabled
                   </button>
                 ) : (

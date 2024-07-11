@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { fetchTest } from "../../service/course.servce";
-import "../../styles/allSubject.scss";
-import { deleteTest, updateTest } from "../../store/reducers/testReducer";
+import { deleteTest, fetchTest, updateTest } from "../../service/course.servce";
+import "../../styles/admin/allSubject.scss";
 
 export default function AllTest() {
   const dispatch: AppDispatch = useDispatch();

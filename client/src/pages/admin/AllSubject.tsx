@@ -6,7 +6,7 @@ import {
   fetchExamSubject,
   updateSubject,
 } from "../../service/course.servce";
-import "../../styles/allSubject.scss";
+import "../../styles/admin/allSubject.scss";
 
 export default function AllSubject() {
   const dispatch: AppDispatch = useDispatch();

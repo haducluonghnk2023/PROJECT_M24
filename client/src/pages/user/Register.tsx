@@ -10,7 +10,7 @@ export default function Register() {
     username: "",
     password: "",
     repassword: "",
-    role: "user",
+    role: 0,
     status: 1,
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -48,8 +48,8 @@ export default function Register() {
     // Kiểm tra password
     if (!formData.password) {
       newErrors.password = "Password không được để trống";
-    } else if (formData.password.length < 7) {
-      newErrors.password = "Password phải có ít nhất 7 kí tự";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password phải có ít nhất 6 kí tự";
     }
 
     // Kiểm tra repassword
@@ -79,7 +79,7 @@ export default function Register() {
             .post("http://localhost:8080/users", userData)
             .then((response) => {
               console.log("Đăng ký thành công:", response.data);
-              navigate("/login");
+              navigate("login");
             })
             .catch((error) => {
               console.error("Lỗi khi đăng ký:", error);
@@ -204,7 +204,7 @@ export default function Register() {
                 Đã có tài khoản?{" "}
                 <a
                   className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                  href="/login"
+                  href="user/login"
                 >
                   Đăng nhập tại đây
                 </a>

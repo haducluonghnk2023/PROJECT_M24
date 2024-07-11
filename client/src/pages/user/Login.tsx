@@ -84,7 +84,7 @@ export default function Login() {
 
           if (passwordMatch) {
             console.log("Đăng nhập thành công:", user);
-            navigate("/admin");
+            navigate("/user");
           } else {
             setErrorMessage(
               "Mật khẩu không đúng. Vui lòng kiểm tra lại thông tin."
@@ -167,6 +167,15 @@ export default function Login() {
               >
                 Đăng nhập
               </button>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Chưa có tài khoản?{" "}
+                <a
+                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                  href="/register/user"
+                >
+                  Đăng ký tại đây
+                </a>
+              </p>
             </form>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import "../../styles/allSubject.scss";
+import "../../styles/admin/allSubject.scss";
 import {
   deleteQuestion,
   fetchQuestion,

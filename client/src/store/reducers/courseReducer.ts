@@ -1,48 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteCourseService, fetchCourses } from "../../service/course.servce";
-import axios from "axios";
+import {  createSlice } from "@reduxjs/toolkit";
+import { addCourse, deleteCourse, fetchCourses, updateCourse } from "../../service/course.servce";
 
-export const addCourse: any = createAsyncThunk(
-  "course/course",
-  async (userCourse, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/courses",
-        userCourse
-      );
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
-export const deleteCourse: any = createAsyncThunk(
-  "courses/deleteCourse",
-  async (courseId, { rejectWithValue }) => {
-    try {
-      await deleteCourseService(courseId);
-      return courseId;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
-export const updateCourse: any = createAsyncThunk(
-  "courses/updateCourse",
-  async (courseData: any, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/courses/${courseData.id}`,
-        courseData
-      );
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 const initialState: any = {
   courses: [],

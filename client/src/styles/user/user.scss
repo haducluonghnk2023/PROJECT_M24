@@ -1,0 +1,197 @@
+// Variables
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+$font-family: 'Roboto', sans-serif;
+
+// Global Styles
+body {
+  font-family: $font-family;
+  color: $dark-color;
+}
+
+// Header Styles
+.header {
+  background-color: $primary-color;
+  color: $light-color;
+  padding: 1rem 0;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .account-section {
+        display: flex;
+        align-items: center;
+  
+        .account-icon {
+          font-size: 2rem;
+          margin-right: 0.5rem;
+        }
+  
+        .account-text {
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+      }
+
+    .header-link {
+      color: $light-color;
+      text-decoration: none;
+      margin-right: 1rem;
+
+      &:hover {
+        color: darken($light-color, 10%);
+      }
+    }
+
+    .auth-links {
+      display: flex;
+      align-items: center;
+
+      .header-link-divider {
+        margin: 0 0.5rem;
+        color: $light-color;
+      }
+    }
+  }
+}
+
+// Navbar Styles
+.navbar {
+  background-color: $dark-color;
+  color: $light-color;
+  padding: 1rem 0;
+
+  .navbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .nav-links {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-left: 2rem;
+
+        a {
+          color: $light-color;
+          text-decoration: none;
+          &:hover {
+            color: lighten($primary-color, 20%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Course List Styles
+.course-list {
+  max-width: 1200px;
+  margin: 3rem auto;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  .course-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 2rem;
+
+    .course-card {
+      background-color: $light-color;
+      border: 1px solid $secondary-color;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: $secondary-color;
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        list-style-type: none;
+        margin-bottom: 1rem;
+
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .btn {
+        background-color: $primary-color;
+        color: $light-color;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+}
+
+// Footer Styles
+.footer {
+    background-color: $dark-color;
+    color: $light-color;
+    padding: 2rem 0;
+    text-align: center;
+  
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid lighten($dark-color, 20%);
+  
+      .footer-info,
+      .footer-contact {
+        max-width: 45%;
+  
+        h3 {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 1rem;
+        }
+  
+        p {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  
+    .footer-bottom {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+  }

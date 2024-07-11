@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-
-import { deleteCourse, updateCourse } from "../../store/reducers/courseReducer";
-import "../../styles/allCourse.scss";
-import "../../styles/courseReducer.scss";
-import { fetchCourses } from "../../service/course.servce";
+import "../../styles/admin/allCourse.scss";
+import "../../styles/admin/courseReducer.scss";
+import {
+  deleteCourse,
+  fetchCourses,
+  updateCourse,
+} from "../../service/course.servce";
 
 interface Course {
   id: string;

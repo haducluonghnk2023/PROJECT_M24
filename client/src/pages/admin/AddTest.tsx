@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/addTest.scss";
+import "../../styles/admin/addTest.scss";
 import { useDispatch } from "react-redux";
 import { addTest } from "../../service/course.servce";
 interface FormData {

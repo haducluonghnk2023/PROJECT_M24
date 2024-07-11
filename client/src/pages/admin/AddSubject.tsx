@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../../styles/addSubject.scss";
+import "../../styles/admin/addSubject.scss";
 import { useDispatch } from "react-redux";
 import { addSubject } from "../../service/course.servce";
 

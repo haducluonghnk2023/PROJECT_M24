@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaRegNoteSticky, FaUsers } from "react-icons/fa6";
-import "../../styles/admin.scss";
+import "../../styles/admin/admin.scss";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,

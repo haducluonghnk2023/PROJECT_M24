@@ -9,54 +9,54 @@
       "status": 1
     },
     {
-      "username": "phamvan minh",
+      "username": "phamvanminh",
       "email": "pvm@gmail.com",
       "password": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "role": 0,
-      "status": 1,
+      "status": 0,
       "repassword": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "id": 4
     },
     {
-      "email": "a@gmail.com",
+      "email": "haducluongdz@gmail.com",
       "username": "haducluong",
-      "password": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
-      "repassword": "$2a$10$iQ/AxXaCfBTjiX00npdh0uGh8N3iemo93tJ7UXQ6R2/Sjcf1DQWn.",
+      "password": "$2a$10$X3TUPpDORkmJyls37niE3eO.u7tRQ0t9TFJ1ZHi1.rnPmEi8AL1vi",
+      "repassword": "$2a$10$X3TUPpDORkmJyls37niE3eO.u7tRQ0t9TFJ1ZHi1.rnPmEi8AL1vi",
       "role": 0,
-      "status": 1,
+      "status": 0,
       "id": 5
     },
     {
       "username": "haducluong",
       "email": "haducluongdz@gmail.com",
-      "password": "$2a$10$zxojYDlpyEJYpARDYbHheee.HDYF/GA6U4/Lhdv3gDFt1JhbjP9B.",
+      "password": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
       "role": 0,
       "status": 1,
-      "repassword": "$2a$10$zxojYDlpyEJYpARDYbHheee.HDYF/GA6U4/Lhdv3gDFt1JhbjP9B.",
+      "repassword": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
       "id": 6
     }
   ],
   "courses": [
     {
       "id": 20,
-      "title": "Khóa luyện thi THPT1",
+      "title": "Khóa luyện thi THPT quốc gia",
       "description": "Khóa luyện thi dành cho học sinh lớp 10,11,12"
     },
     {
-      "title": "Khóa luyện thi cấp 2",
-      "description": "Khóa luyện thi dành cho học sinh lớp 9",
+      "title": "Khóa luyện thi cho học sinh giỏi cấp quốc gia",
+      "description": "Khóa luyện thi dành cho học sinh lớp 9,12",
       "id": 21
     }
   ],
   "examSubject": [
     {
-      "id": 21,
+      "id": 10,
       "title": "Vật lí lớp 11",
       "description": "Luyện thi vật lí lớp 11",
-      "courseId": 21
+      "courseId": 20
     },
     {
-      "id": 22,
+      "id": 11,
       "title": "Hóa học lớp 11",
       "description": "Luyện thi Hóa học lớp 11",
       "courseId": 21
