@@ -11,7 +11,7 @@ export default function Login() {
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginForm>>({});
-  //   const [emailExists, setEmailExists] = useState<boolean | null>(null);
+
   const navigate = useNavigate();
 
   const validate = () => {
@@ -32,6 +32,7 @@ export default function Login() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const handleChange: any = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -64,8 +65,6 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const passwordLogin = await bcrypt.hash(formData.password, 10);
-    // console.log(passwordLogin);
     if (validate()) {
       try {
         const response = await axios.get("http://localhost:8080/users");
@@ -78,12 +77,11 @@ export default function Login() {
             formData.password,
             user.password
           );
-          // console.log(formData.password);
-          // console.log(user.password);
-          // console.log(passwordMatch);
 
           if (passwordMatch) {
             console.log("Đăng nhập thành công:", user);
+            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            localStorage.setItem("isLoggedIn", JSON.stringify(true));
             navigate("/user");
           } else {
             setErrorMessage(

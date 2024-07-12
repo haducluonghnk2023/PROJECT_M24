@@ -57,7 +57,7 @@ export default function Course() {
               <Link to="/user">Trang chủ</Link>
             </li>
             <li>
-              <Link to="/courses">Các khóa thi</Link>
+              <Link to="/user/content">Các khóa thi</Link>
             </li>
             <li>
               <Link to="/faq">Hỏi đáp</Link>

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const [getUser, setGetUser] = useState<any>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navigate = useNavigate();
   const fetchUsers = async () => {
     try {
@@ -11,23 +12,30 @@ export default function Header() {
         throw new Error("Lỗi lấy dữ liệu người dùng");
       }
       const data = await response.json();
-      setGetUser(data);
+      console.log(data);
     } catch (error) {
       console.error("Lỗi:", error);
     }
   };
-
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  console.log(getUser);
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loggedIn === "true");
+  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    navigate("/register/user/login");
+  };
 
   return (
     <div>
       <header className="header">
         <div className="header-content">
-          {getUser && getUser[1].status === 1 ? (
+          {isLoggedIn && (
             <div
               className="account-section"
               onClick={() => navigate("/user/account")}
@@ -37,17 +45,26 @@ export default function Header() {
               </span>
               <span className="account-text"> Account</span>
             </div>
-          ) : (
-            <div className="auth-links">
-              <Link to="/register/user" className="header-link">
-                Đăng kí
-              </Link>
-              <span className="header-link-divider">/</span>
-              <Link to="/register/user/login" className="header-link">
-                Đăng nhập
-              </Link>
-            </div>
           )}
+
+          <div className="auth-links">
+            {!isLoggedIn && (
+              <>
+                <Link to="/register/user" className="header-link">
+                  Đăng kí
+                </Link>
+                <span className="header-link-divider">/</span>
+                <Link to="/register/user/login" className="header-link">
+                  Đăng nhập
+                </Link>
+              </>
+            )}
+            {isLoggedIn && (
+              <button onClick={handleLogout} className="header-link">
+                Đăng xuất
+              </button>
+            )}
+          </div>
         </div>
       </header>
     </div>

@@ -11,13 +11,13 @@ export default function Navbar() {
               <Link to="/user">Trang chủ</Link>
             </li>
             <li>
-              <Link to="/course">Các khóa thi</Link>
+              <Link to="/user/content">Các khóa thi</Link>
             </li>
             <li>
-              <Link to="/faq">Hỏi đáp</Link>
+              <Link to="/user">Hỏi đáp</Link>
             </li>
             <li>
-              <Link to="/contact">Liên hệ</Link>
+              <Link to="/user">Liên hệ</Link>
             </li>
           </ul>
         </div>

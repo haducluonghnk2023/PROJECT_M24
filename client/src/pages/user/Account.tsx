@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/user/userAccount.scss";
+import axios from "axios";
 
 export default function UserAccount() {
   const [userData, setUserData] = useState<any>(null);
@@ -9,20 +10,6 @@ export default function UserAccount() {
   const [updatedUserData, setUpdatedUserData] = useState<any>({});
   const navigate = useNavigate();
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/users");
-      if (!response.ok) {
-        throw new Error("Lỗi lấy dữ liệu người dùng");
-      }
-      const data = await response.json();
-      setUserData(data[1]);
-      setUpdatedUserData(data[1]); // Initialize updated user data
-    } catch (error) {
-      console.error("Lỗi:", error);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUpdatedUserData((prevData: any) => ({
@@ -30,26 +17,17 @@ export default function UserAccount() {
       [name]: value,
     }));
   };
-
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch(
+      const response = await axios.put(
         `http://localhost:8080/users/${userData.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUserData),
-        }
+        updatedUserData
       );
-
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("Lỗi cập nhật thông tin người dùng");
       }
-
-      const data = await response.json();
-      setUserData(data);
+      const updatedData = response.data;
+      setUserData(updatedData);
       setIsEditing(false);
     } catch (error) {
       console.error("Lỗi:", error);
@@ -57,11 +35,20 @@ export default function UserAccount() {
   };
 
   useEffect(() => {
-    fetchUserData();
     const storedHistory = JSON.parse(
       localStorage.getItem("examHistory") || "[]"
     );
     setExamHistory(storedHistory);
+
+    const loggedInUser = JSON.parse(
+      localStorage.getItem("loggedInUser") || "{}"
+    );
+
+    if (loggedInUser) {
+      console.log(111111);
+      setUserData(loggedInUser);
+      setUpdatedUserData(loggedInUser);
+    }
   }, []);
 
   return (
