@@ -3,37 +3,19 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "123",
+      "password": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
       "email": "admin@gmail.com",
       "role": 1,
       "status": 1
     },
     {
-      "username": "phamvanminh",
+      "username": "phamvanminhngu",
       "email": "pvm@gmail.com",
       "password": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "role": 0,
-      "status": 0,
+      "status": 1,
       "repassword": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
       "id": 4
-    },
-    {
-      "email": "haducluongdz@gmail.com",
-      "username": "haducluong",
-      "password": "$2a$10$X3TUPpDORkmJyls37niE3eO.u7tRQ0t9TFJ1ZHi1.rnPmEi8AL1vi",
-      "repassword": "$2a$10$X3TUPpDORkmJyls37niE3eO.u7tRQ0t9TFJ1ZHi1.rnPmEi8AL1vi",
-      "role": 0,
-      "status": 0,
-      "id": 5
-    },
-    {
-      "username": "haducluong",
-      "email": "haducluongdz@gmail.com",
-      "password": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
-      "role": 0,
-      "status": 1,
-      "repassword": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
-      "id": 6
     }
   ],
   "courses": [
@@ -48,7 +30,7 @@
       "id": 21
     },
     {
-      "title": "Khóa luyện thi IELTS",
+      "title": "Khóa luyện thi IELTS cao cấp",
       "description": "Dành cho học sinh từ 700+ TOEIC trở lên",
       "id": 22
     }
@@ -56,15 +38,15 @@
   "examSubject": [
     {
       "id": 101,
-      "title": "Vật lí lớp 11",
-      "description": "Luyện thi vật lí lớp 11",
+      "title": "Toán học lớp 12",
+      "description": "Luyện thi toán học lớp 12",
       "courseId": 20
     },
     {
       "id": 102,
-      "title": "Hóa học lớp 11",
-      "description": "Luyện thi Hóa học lớp 11",
-      "courseId": 20
+      "title": "Hóa học lớp 12",
+      "description": "Luyện thi Hóa học lớp 12",
+      "courseId": 21
     },
     {
       "id": 103,
@@ -80,63 +62,370 @@
     },
     {
       "id": 105,
-      "title": "Toán học lớp 12",
-      "description": "Luyện thi Toán học lớp 12",
+      "title": "Vật lí lớp 11",
+      "description": "Luyện thi vật lí lớp 11",
       "courseId": 20
+    },
+    {
+      "title": "Vật lí lớp 10",
+      "description": "Luyện thi vật lí cho học sinh lớp 10",
+      "courseId": 20,
+      "id": 106
     }
   ],
   "test": [
     {
       "id": 1111,
-      "lesson_id": "20",
       "title": "Đề thi toán học THPT Chuyên Hùng Vương",
       "description": "Đề thi toán năm 2024",
       "duration": 90,
-      "examSubjectId": 1
+      "examSubjectId": 101
     },
     {
       "id": 2,
-      "lesson_id": "29",
-      "title": "Đề thi Vật lí cơ bản lớp 11",
-      "description": "Đề thi gồm các câu hỏi cơ bản về vật lí lớp 11",
+      "title": "Đề thi Hóa học lớp 12",
+      "description": "Đề thi gồm các câu hỏi cơ bản về Hóa học lớp 12",
       "duration": 50,
-      "examSubjectId": 2
-    }
-  ],
-  "questions": [
-    {
-      "id": 111111,
-      "testId": 1111,
-      "question": "phương trình có nghiệm x=? x^2 - 2x +1 = 0",
-      "answer": "1",
-      "examId": 1,
-      "option": [
-        "0",
-        "1",
-        "2",
-        "3"
-      ]
+      "examSubjectId": 102
     },
     {
-      "id": 11111111111,
-      "testId": 1111,
-      "question": "Định lí pytago áp dụng cho tam giác nào",
-      "answer": "tam giác vuông",
-      "examId": 2,
-      "option": [
-        "Tam giác vuông",
-        "Tam giác đều",
-        "Tam giác cân",
-        "Tam giác đều"
-      ]
+      "title": "Đề thi vật lí lớp 10",
+      "description": "Đề luyện thi nâng cao lí lớp 10",
+      "duration": 60,
+      "examSubjectId": 106,
+      "id": 1112
     }
   ],
+    "questions": [
+      {
+        "id": 1,
+        "testId": 1111,
+        "question": "Giải phương trình sau: x^2 - 4x + 4 = 0",
+        "answer": "2",
+        "examId": 10,
+        "option": ["1", "2", "3", "4"]
+      },
+      {
+        "id": 2,
+        "testId": 1111,
+        "question": "Tính giá trị của hàm số f(x) = 2x^2 - 3x + 1 khi x = 2",
+        "answer": "5",
+        "examId": 10,
+        "option": ["3", "5", "7", "9"]
+      },
+      {
+        "id": 3,
+        "testId": 1111,
+        "question": "Cho tam giác ABC vuông tại A, cạnh huyền AB = 5cm và cạnh góc A = 3cm. Tính cạnh còn lại của tam giác ABC.",
+        "answer": "4cm",
+        "examId": 11,
+        "option": ["3cm", "4cm", "5cm", "6cm"]
+      },
+      {
+        "id": 4,
+        "testId": 1111,
+        "question": "Tìm giới hạn của dãy số sau: lim(n → ∞) (1 + 1/n)^n",
+        "answer": "e",
+        "examId": 12,
+        "option": ["e", "π", "1", "0"]
+      },
+      {
+        "id": 5,
+        "testId": 1111,
+        "question": "Phương trình tiếp tuyến của đồ thị hàm số y = x^3 tại điểm có hoành độ x = 2 là gì?",
+        "answer": "y = 12x - 16",
+        "examId": 12,
+        "option": ["y = 3x - 6", "y = 6x - 8", "y = 9x - 12", "y = 12x - 16"]
+      },
+      {
+        "id": 6,
+        "testId": 1111,
+        "question": "Tính diện tích hình chữ nhật có chiều dài 5cm và chiều rộng 3cm.",
+        "answer": "15cm^2",
+        "examId": 11,
+        "option": ["8cm^2", "10cm^2", "12cm^2", "15cm^2"]
+      },
+      {
+        "id": 7,
+        "testId": 1111,
+        "question": "Tìm phương trình đường thẳng đi qua điểm (1, 2) và có vectơ pháp tuyến (3, -1).",
+        "answer": "3x + y = 5",
+        "examId": 10,
+        "option": ["2x + 3y = 7", "3x + y = 5", "2x - 3y = 1", "3x - y = 1"]
+      },
+      {
+        "id": 8,
+        "testId": 1111,
+        "question": "Tính tổng các số nguyên từ 1 đến 100.",
+        "answer": "5050",
+        "examId": 11,
+        "option": ["4950", "5000", "5050", "5100"]
+      },
+      {
+        "id": 9,
+        "testId": 1111,
+        "question": "Cho số phức z = 1 + i. Tính z^2.",
+        "answer": "2i",
+        "examId": 12,
+        "option": ["i", "-i", "2i", "-2i"]
+      },
+      {
+        "id": 10,
+        "testId": 1111,
+        "question": "Tính tích phân của hàm số f(x) = 2x + 1 trên đoạn [0, 2].",
+        "answer": "5",
+        "examId": 10,
+        "option": ["3", "4", "5", "6"]
+      },
+      {
+        "id": 11,
+        "testId": 1111,
+        "question": "Phân tích thành thừa số nguyên tố của số 126.",
+        "answer": "2 x 3^2 x 7",
+        "examId": 11,
+        "option": ["2 x 3^2 x 7", "2^2 x 3^2 x 7", "2 x 3 x 7", "2^2 x 3 x 7"]
+      },
+      {
+        "id": 12,
+        "testId": 1111,
+        "question": "Tìm số nghiệm của phương trình sin(x) = 0 trên khoảng [0, 2π].",
+        "answer": "2",
+        "examId": 12,
+        "option": ["1", "2", "3", "4"]
+      },
+      {
+        "id": 13,
+        "testId": 1111,
+        "question": "Tính tích phân không xác định của hàm số f(x) = e^x.",
+        "answer": "e^x + C",
+        "examId": 10,
+        "option": ["e^x", "e^x + C", "e^-x + C", "e^-x"]
+      },
+      {
+        "id": 14,
+        "testId": 1111,
+        "question": "Tìm phương trình đường thẳng song song với đường thẳng đã biết, đi qua điểm (1, 2).",
+        "answer": "y = 2",
+        "examId": 11,
+        "option": ["y = 2x", "y = 2", "y = -2x", "y = -2"]
+      },
+      {
+        "id": 15,
+        "testId": 1111,
+        "question": "Tính tích phân xác định của hàm số f(x) = 2x^2 trên đoạn [-1, 1].",
+        "answer": "0",
+        "examId": 12,
+        "option": ["1", "2", "0", "-1"]
+      },
+      {
+        "id": 16,
+        "testId": 1111,
+        "question": "Tìm giá trị của hàm số f(x) = log(x) khi x = 10.",
+        "answer": "1",
+        "examId": 10,
+        "option": ["0", "1", "10", "100"]
+      },
+      {
+        "id": 17,
+        "testId": 1111,
+        "question": "Phân tích thành thừa số nguyên tố của số 360.",
+        "answer": "2^3 x 3^2 x 5",
+        "examId": 11,
+        "option": ["2^3 x 3^2 x 5", "2^4 x 3^2 x 5", "2^3 x 3^3 x 5", "2^4 x 3^3 x 5"]
+      },
+      {
+        "id": 18,
+        "testId": 1111,
+        "question": "Tìm đạo hàm của hàm số f(x) = x^2 + 2x + 1.",
+        "answer": "2x + 2",
+        "examId": 12,
+        "option": ["2x", "2x + 1", "2x + 2", "2x + 3"]
+      },
+      {
+        "id": 19,
+        "testId": 1111,
+        "question": "Tính giá trị của biểu thức: √9 + √16.",
+        "answer": "7",
+        "examId": 10,
+        "option": ["3", "4", "5", "7"]
+      },
+      {
+        "id": 20,
+        "testId": 1111,
+        "question": "Tìm phương trình đường thẳng đi qua hai điểm (-1, 2) và (3, 4).",
+        "answer": "y = x + 3",
+        "examId": 11,
+        "option": ["y = x + 2", "y = x + 3", "y = x + 4", "y = x + 5"]
+      },
+      {
+        "id": 21,
+        "testId": 2,
+        "question": "Xác định số oxi hóa của S trong SO2.",
+        "answer": "+4",
+        "examId": 10,
+        "option": ["+2", "+4", "+6", "0"]
+      },
+      {
+        "id": 22,
+        "testId": 2,
+        "question": "Phản ứng nào sau đây là phản ứng oxi hóa-khử?",
+        "answer": "Zn + HCl -> ZnCl2 + H2",
+        "examId": 11,
+        "option": ["H2 + Cl2 -> 2HCl", "CaCO3 -> CaO + CO2", "Zn + HCl -> ZnCl2 + H2", "AgNO3 + NaCl -> AgCl + NaNO3"]
+      },
+      {
+        "id": 23,
+        "testId": 2,
+        "question": "Tính số mol của 5,6g sắt (Fe).",
+        "answer": "0,1 mol",
+        "examId": 12,
+        "option": ["0,1 mol", "0,2 mol", "0,3 mol", "0,4 mol"]
+      },
+      {
+        "id": 24,
+        "testId": 2,
+        "question": "Tìm số mol của CO2 trong 22,4 lít khí ở điều kiện tiêu chuẩn.",
+        "answer": "1 mol",
+        "examId": 10,
+        "option": ["0,5 mol", "1 mol", "1,5 mol", "2 mol"]
+      },
+      {
+        "id": 25,
+        "testId": 2,
+        "question": "Phương trình ion rút gọn của phản ứng giữa Ba(OH)2 và H2SO4 là gì?",
+        "answer": "Ba2+ + SO42- -> BaSO4",
+        "examId": 11,
+        "option": ["Ba2+ + SO42- -> BaSO4", "Ba(OH)2 + H2SO4 -> BaSO4 + 2H2O", "Ba2+ + 2OH- -> Ba(OH)2", "H2SO4 -> 2H+ + SO42-"]
+      },
+      {
+        "id": 26,
+        "testId": 2,
+        "question": "Tính nồng độ mol của dung dịch chứa 10 mol HCl trong 2 lít dung dịch.",
+        "answer": "5 M",
+        "examId": 12,
+        "option": ["2 M", "4 M", "5 M", "10 M"]
+      },
+      {
+        "id": 27,
+        "testId": 2,
+        "question": "Tìm số nguyên tử trong 1 mol nước (H2O).",
+        "answer": "3,6 x 10^24",
+        "examId": 10,
+        "option": ["6,02 x 10^23", "1,8 x 10^24", "3,6 x 10^24", "5,4 x 10^24"]
+      },
+      {
+        "id": 28,
+        "testId": 2,
+        "question": "Phương trình hóa học của phản ứng giữa Mg và HCl là gì?",
+        "answer": "Mg + 2HCl -> MgCl2 + H2",
+        "examId": 11,
+        "option": ["Mg + 2HCl -> MgCl2 + H2", "Mg + HCl -> MgCl + H", "Mg + HCl -> MgH + Cl", "Mg + 2HCl -> MgH2 + Cl2"]
+      },
+      {
+        "id": 29,
+        "testId": 2,
+        "question": "Tính số mol của 10g NaCl.",
+        "answer": "0,17 mol",
+        "examId": 12,
+        "option": ["0,1 mol", "0,17 mol", "0,2 mol", "0,25 mol"]
+      },
+      {
+        "id": 30,
+        "testId": 2,
+        "question": "Tính nồng độ phần trăm của dung dịch chứa 20g NaCl trong 100g dung dịch.",
+        "answer": "20%",
+        "examId": 10,
+        "option": ["10%", "20%", "30%", "40%"]
+      },
+      {
+        "id": 31,
+        "testId": 2,
+        "question": "Xác định số oxi hóa của Fe trong Fe2O3.",
+        "answer": "+3",
+        "examId": 11,
+        "option": ["+2", "+3", "+4", "+6"]
+      },
+      {
+        "id": 32,
+        "testId": 2,
+        "question": "Phản ứng nào sau đây không phải là phản ứng oxi hóa-khử?",
+        "answer": "HCl + NaOH -> NaCl + H2O",
+        "examId": 12,
+        "option": ["H2 + Cl2 -> 2HCl", "CaCO3 -> CaO + CO2", "Zn + HCl -> ZnCl2 + H2", "HCl + NaOH -> NaCl + H2O"]
+      },
+      {
+        "id": 33,
+        "testId": 2,
+        "question": "Tính số mol của 4g He.",
+        "answer": "1 mol",
+        "examId": 10,
+        "option": ["0,5 mol", "1 mol", "1,5 mol", "2 mol"]
+      },
+      {
+        "id": 34,
+        "testId": 2,
+        "question": "Tìm số mol của N2 trong 22,4 lít khí ở điều kiện tiêu chuẩn.",
+        "answer": "1 mol",
+        "examId": 11,
+        "option": ["0,5 mol", "1 mol", "1,5 mol", "2 mol"]
+      },
+      {
+        "id": 35,
+        "testId": 2,
+        "question": "Phương trình ion rút gọn của phản ứng giữa AgNO3 và NaCl là gì?",
+        "answer": "Ag+ + Cl- -> AgCl",
+        "examId": 12,
+        "option": ["Ag+ + Cl- -> AgCl", "AgNO3 + NaCl -> AgCl + NaNO3", "Ag+ + NO3- -> AgNO3", "Na+ + Cl- -> NaCl"]
+      },
+      {
+        "id": 36,
+        "testId": 2,
+        "question": "Tính nồng độ mol của dung dịch chứa 5 mol H2SO4 trong 1 lít dung dịch.",
+        "answer": "5 M",
+        "examId": 10,
+        "option": ["2 M", "4 M", "5 M", "10 M"]
+      },
+      {
+        "id": 37,
+        "testId": 2,
+        "question": "Tìm số nguyên tử trong 2 mol khí oxy (O2).",
+        "answer": "1,2 x 10^24",
+        "examId": 11,
+        "option": ["6,02 x 10^23", "1,2 x 10^24", "2,4 x 10^24", "4,8 x 10^24"]
+      },
+      {
+        "id": 38,
+        "testId": 2,
+        "question": "Phương trình hóa học của phản ứng giữa Ca và HCl là gì?",
+        "answer": "Ca + 2HCl -> CaCl2 + H2",
+        "examId": 12,
+        "option": ["Ca + 2HCl -> CaCl2 + H2", "Ca + HCl -> CaCl + H", "Ca + HCl -> CaH + Cl", "Ca + 2HCl -> CaH2 + Cl2"]
+      },
+      {
+        "id": 39,
+        "testId": 2,
+        "question": "Tính số mol của 15g NaOH.",
+        "answer": "0,375 mol",
+        "examId": 10,
+        "option": ["0,1 mol", "0,375 mol", "0,5 mol", "0,75 mol"]
+      },
+      {
+        "id": 40,
+        "testId": 2,
+        "question": "Tính nồng độ phần trăm của dung dịch chứa 25g NaOH trong 100g dung dịch.",
+        "answer": "25%",
+        "examId": 11,
+        "option": ["10%", "20%", "25%", "30%"]
+      }
+    ]
+  ,
   "userAnswer": [
     {
       "id": 1,
       "userId": 1,
       "examId": 1,
-      "score": 15
+      "score": 15,
+      "answerUser": 1
     }
   ],
   "comments": [

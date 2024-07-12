@@ -17,6 +17,8 @@ import Register from "./pages/user/Register";
 import User from "./pages/user/User";
 import Course from "./pages/user/Course";
 import Questions from "./pages/user/Question";
+import Test from "./pages/user/Test";
+import UserAccount from "./pages/user/Account";
 // import NotFound from "./pages/admin/NotFound";
 
 export default function App() {
@@ -26,8 +28,10 @@ export default function App() {
         <Route path="register/user" element={<Register></Register>}></Route>
         <Route path="register/user/login" element={<LoginUser />}></Route>
         <Route path="user" element={<User />}></Route>
+        <Route path="/user/account" element={<UserAccount />} />
         <Route path="/course/:courseId" element={<Course />} />
-        <Route path="/questions/:subjectId" element={<Questions />} />
+        <Route path="/test/:testId" element={<Test />} />
+        <Route path="/questions/:questionId" element={<Questions />} />
         <Route path="login/admin" element={<Login />}></Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<DashBoard />} />

@@ -8,6 +8,8 @@ import questionReducer from "./reducers/questionReducer";
 import userReducer from "./reducers/userReducer";
 import userSubjectReducer from "./reducers/userSubjectReducer";
 
+
+
 const store:any = configureStore({
   reducer: {
     admin:adminReducer ,
@@ -18,9 +20,11 @@ const store:any = configureStore({
     question:questionReducer,
     user:userReducer,
     examSubject:userSubjectReducer
+  
   },
 });
 
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export default store;
+export default store ;

@@ -1,26 +1,51 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../../styles/user/course.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { fetchExamSubjectUser } from "../../service/course.servce";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getTestId } from "../../service/course.servce";
 
 export default function Course() {
   const navigate = useNavigate();
-  const examSubject = useSelector((state: any) => state.examSubject.test);
-  const state: any = useSelector((state) => state);
-
   const dispatch = useDispatch();
+  const { courseId } = useParams<{ courseId: string }>();
+  const [examSubjects, setExamSubjects] = useState<any[]>([]);
+  const [filteredSubjects, setFilteredSubjects] = useState<any[]>([]);
 
   useEffect(() => {
-    dispatch(fetchExamSubjectUser());
+    fetchExamSubjects();
   }, []);
-  //   console.log(examSubject);
-  //   console.log(state.examSubject.id, 1232131312);
+
+  useEffect(() => {
+    if (examSubjects.length > 0) {
+      const filtered = examSubjects.filter(
+        (subject: any) => subject.courseId === parseInt(courseId!)
+      );
+      setFilteredSubjects(filtered);
+    }
+  }, [examSubjects, courseId]);
+
+  const fetchExamSubjects = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/examSubject");
+      if (!response.ok) {
+        throw new Error("Lỗi lấy dữ liệu môn thi");
+      }
+      const data = await response.json();
+      setExamSubjects(data);
+      // Lưu trữ dữ liệu vào localStorage
+      localStorage.setItem("examSubjects", JSON.stringify(data));
+    } catch (error) {
+      console.error("Lỗi:", error);
+    }
+  };
 
   const handleJoinExam = (subjectId: number) => {
-    navigate(`/questions/${subjectId}`);
-    // console.log(`/questions/${subjectId}`);
+    // console.log(subjectId);
+    dispatch(getTestId(subjectId));
+    navigate(`/test/${subjectId}`);
   };
+
+  console.log(examSubjects);
 
   return (
     <div>
@@ -44,18 +69,14 @@ export default function Course() {
         </div>
       </nav>
       <main className="course-detail">
-        {examSubject.map((item: any) => {
-          if (item.courseId === state.examSubject.id) {
-            return (
-              <div key={item.id} className="course-section">
-                <h2>{item.title}</h2>
-                <button className="btn" onClick={() => handleJoinExam(item.id)}>
-                  Tham gia môn thi
-                </button>
-              </div>
-            );
-          }
-        })}
+        {filteredSubjects.map((item: any) => (
+          <div key={item.id} className="course-section">
+            <h2>{item.title}</h2>
+            <button className="btn" onClick={() => handleJoinExam(item.id)}>
+              Tham gia môn thi
+            </button>
+          </div>
+        ))}
       </main>
     </div>
   );

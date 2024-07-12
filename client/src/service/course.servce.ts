@@ -79,6 +79,7 @@ export const fetchExamSubject: any = createAsyncThunk<any>(
   "admin/fetchExamSubject",
   async () => {
     const res = await axios.get("http://localhost:8080/examSubject");
+    // console.log(res.data);
     return res.data;
   }
 );
@@ -264,6 +265,9 @@ export const updateTest: any = createAsyncThunk(
 
 export const getCourseId :any = createAsyncThunk("get/courseId", async(id)=>{
   return id
+})
+export const getTestId :any = createAsyncThunk("get/testId", async(id)=>{
+  return id;
 })
 
 

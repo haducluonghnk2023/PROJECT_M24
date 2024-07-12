@@ -11,7 +11,7 @@ export default function Login() {
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginForm>>({});
-  const [emailExists, setEmailExists] = useState<boolean | null>(null);
+  //   const [emailExists, setEmailExists] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
   const validate = () => {

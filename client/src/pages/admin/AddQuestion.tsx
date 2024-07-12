@@ -1,54 +1,54 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/admin/addQuestion.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import {
-  addQuestion,
-  fetchExamSubject,
-  fetchExamSubjectUser,
-  fetchTest,
-} from "../../service/course.servce";
+import { addQuestion } from "../../service/course.servce";
 
-interface FormData {
+interface Question {
+  id: number;
+  testId: any;
   question: string;
   answer: string;
-  testId: number | string;
+  option: string[];
 }
 
 export default function AddQuestion() {
   const dispatch = useDispatch<AppDispatch>();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<Question>({
+    id: 0,
+    testId: 0,
+    question: "",
+    answer: "",
+    option: ["", "", "", ""],
+  });
+  const [formErrors, setFormErrors] = useState<Partial<Question>>({
     question: "",
     answer: "",
     testId: 0,
+    option: ["", "", "", ""],
   });
-  const [formErrors, setFormErrors] = useState<FormData>({
-    question: "",
-    answer: "",
-    testId: 0,
-  });
-
-  const [questions, setQuestions] = useState<any>([]);
+  const [tests, setTests] = useState<any[]>([]);
 
   useEffect(() => {
-    fetchTest();
+    fetchTestsApi();
   }, []);
 
-  const fetchTest = async () => {
+  const fetchTestsApi = async () => {
     try {
       const response = await fetch("http://localhost:8080/test");
       if (!response.ok) {
-        throw new Error("Lỗi lấy dữ liệu khóa thi");
+        throw new Error("Lỗi lấy dữ liệu đề thi");
       }
       const data = await response.json();
-      setQuestions(data);
+      setTests(data);
     } catch (error) {
       console.error("Lỗi:", error);
     }
   };
+
   const validate = () => {
-    const errors: Partial<FormData> = {};
+    const errors: Partial<Question> = {};
     if (!formData.question.trim()) {
       errors.question = "Vui lòng nhập câu hỏi";
     }
@@ -58,7 +58,10 @@ export default function AddQuestion() {
     if (!formData.testId) {
       errors.testId = "Vui lòng chọn đề thi";
     }
-    setFormErrors(errors as FormData);
+    if (formData.option.some((opt) => !opt.trim())) {
+      errors.option = ["Vui lòng nhập tất cả các lựa chọn"];
+    }
+    setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
@@ -71,8 +74,19 @@ export default function AddQuestion() {
     dispatch(addQuestion(formData))
       .then(() => {
         setShowSuccessMessage(true);
-        setFormData({ question: "", answer: "", testId: 0 });
-        setFormErrors({ question: "", answer: "", testId: 0 });
+        setFormData({
+          id: 0,
+          testId: 0,
+          question: "",
+          answer: "",
+          option: ["", "", "", ""],
+        });
+        setFormErrors({
+          question: "",
+          answer: "",
+          testId: 0,
+          option: ["", "", "", ""],
+        });
       })
       .catch((err: any) => {
         console.error("Thêm câu hỏi không thành công:", err);
@@ -88,10 +102,31 @@ export default function AddQuestion() {
       [name]: name === "testId" ? Number(value) : value,
     });
 
-    if (formErrors[name as keyof FormData]) {
+    if (formErrors[name as keyof Question]) {
       setFormErrors({
         ...formErrors,
         [name]: "",
+      });
+    }
+  };
+
+  const handleOptionChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const newOptions = [...formData.option];
+    newOptions[index] = e.target.value;
+    setFormData({
+      ...formData,
+      option: newOptions,
+    });
+
+    if (formErrors.option && formErrors.option.length > 0) {
+      const newErrors = [...formErrors.option];
+      newErrors[index] = "";
+      setFormErrors({
+        ...formErrors,
+        option: newErrors,
       });
     }
   };
@@ -127,13 +162,27 @@ export default function AddQuestion() {
           onChange={handleInputChange}
         >
           <option value="">Chọn đề thi</option>
-          {questions.map((test: any) => (
+          {tests.map((test) => (
             <option key={test.id} value={test.id}>
               {test.title}
             </option>
           ))}
         </select>
         {formErrors.testId && <p className="error">{formErrors.testId}</p>}
+        <label>Các lựa chọn:</label>
+        {formData.option.map((opt, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              value={opt}
+              onChange={(e) => handleOptionChange(e, index)}
+              placeholder={`Lựa chọn ${index + 1}`}
+            />
+            {formErrors.option && formErrors.option[index] && (
+              <p className="error">{formErrors.option[index]}</p>
+            )}
+          </div>
+        ))}
         <button type="submit">Thêm</button>
       </form>
     </div>

@@ -1,106 +1,178 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../../styles/user/question.scss";
-interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: number;
-}
 
-const questionsData: Record<
-  number,
-  { subject: string; questions: Question[]; time: number }
-> = {
-  1: {
-    subject: "Toán",
-    questions: [
-      {
-        question: "Câu hỏi 1: 1 + 1 = ?",
-        options: ["1", "2", "3", "4"],
-        correctAnswer: 1,
-      },
-      {
-        question: "Câu hỏi 2: 2 + 2 = ?",
-        options: ["2", "3", "4", "5"],
-        correctAnswer: 2,
-      },
-    ],
-    time: 60,
-  },
-  2: {
-    subject: "Văn",
-    questions: [
-      {
-        question: "Phân tích bài thơ 'Qua Đèo Ngang'.",
-        options: ["Đáp án 1", "Đáp án 2", "Đáp án 3", "Đáp án 4"],
-        correctAnswer: 0,
-      },
-      {
-        question: "Bình luận về nhân vật chính trong truyện 'Chiếc Lược Ngà'.",
-        options: ["Đáp án 1", "Đáp án 2", "Đáp án 3", "Đáp án 4"],
-        correctAnswer: 1,
-      },
-    ],
-    time: 120,
-  },
-};
-
-export default function Questions() {
-  const { subjectId } = useParams<{ subjectId: string }>();
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [subject, setSubject] = useState<string>("");
-  const [time, setTime] = useState<number>(0);
-  const [answers, setAnswers] = useState<number[]>([]);
+export default function Question() {
+  const { questionId } = useParams<{ questionId: string }>();
+  const [questions, setQuestions] = useState<any[]>([]);
+  const [filteredQuestions, setFilteredQuestions] = useState<any[]>([]);
+  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [totalTime, setTotalTime] = useState<number>(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (subjectId && questionsData[Number(subjectId)]) {
-      setQuestions(questionsData[Number(subjectId)].questions);
-      setSubject(questionsData[Number(subjectId)].subject);
-      setTime(questionsData[Number(subjectId)].time);
-      setAnswers(
-        new Array(questionsData[Number(subjectId)].questions.length).fill(-1)
-      );
-    }
-  }, [subjectId]);
+    const storedQuestions = localStorage.getItem("questions");
+    const storedTimeLeft = localStorage.getItem("timeLeft");
 
-  const handleAnswerChange = (questionIndex: number, answerIndex: number) => {
-    const newAnswers = [...answers];
-    newAnswers[questionIndex] = answerIndex;
-    setAnswers(newAnswers);
+    if (storedQuestions) {
+      setQuestions(JSON.parse(storedQuestions));
+    } else {
+      fetchQuestions();
+    }
+
+    if (storedTimeLeft) {
+      setTimeLeft(parseInt(storedTimeLeft));
+    } else {
+      fetchTestDetails();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (questions.length > 0) {
+      const filtered = questions.filter(
+        (question: any) => question.testId === parseInt(questionId!)
+      );
+      console.log(filtered);
+
+      setFilteredQuestions(filtered);
+      console.log(questions);
+    }
+  }, [questions, questionId]);
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer);
+            handleSubmit();
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+
+      localStorage.setItem("timeLeft", timeLeft.toString());
+
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft]);
+
+  const fetchQuestions = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/questions");
+      if (!response.ok) {
+        throw new Error("Lỗi lấy dữ liệu môn thi");
+      }
+      const data = await response.json();
+      setQuestions(data);
+      localStorage.setItem("questions", JSON.stringify(data));
+    } catch (error) {
+      console.error("Lỗi:", error);
+    }
+  };
+
+  const fetchTestDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/test/${questionId}`);
+      if (!response.ok) {
+        throw new Error("Lỗi lấy dữ liệu bài thi");
+      }
+      const data = await response.json();
+      const durationInSeconds = data.duration * 60;
+      setTimeLeft(durationInSeconds);
+      setTotalTime(durationInSeconds);
+      localStorage.setItem("timeLeft", durationInSeconds.toString());
+    } catch (error) {
+      console.error("Lỗi:", error);
+    }
+  };
+
+  const handleAnswerChange = (questionId: number, answer: string) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: answer,
+    }));
   };
 
   const handleSubmit = () => {
+    console.log(totalTime);
     let score = 0;
-    questions.forEach((question, index) => {
-      if (answers[index] === question.correctAnswer) {
+    filteredQuestions.forEach((question) => {
+      if (answers[question.id] === question.answer) {
         score += 1;
       }
     });
 
-    alert(`Bài thi đã được nộp! Điểm của bạn: ${score}/${questions.length}`);
+    const timeSpent = totalTime - timeLeft; // Thời gian đã dùng làm bài
+
+    const examHistory = {
+      questionId: questionId,
+      score: score,
+      totalQuestions: filteredQuestions.length,
+      timeTaken: timeSpent,
+    };
+
+    const storedHistory = JSON.parse(
+      localStorage.getItem("examHistory") || "[]"
+    );
+
+    storedHistory.push(examHistory);
+
+    localStorage.setItem("examHistory", JSON.stringify(storedHistory));
+    localStorage.removeItem("timeLeft");
+
+    alert(
+      `Bài thi đã được nộp! Số câu làm đúng của bạn: ${score}/${filteredQuestions.length}`
+    );
     navigate("/user");
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   return (
     <div className="questions-page">
-      <h1>{subject}</h1>
-      <div className="timer">Thời gian làm bài: {time} phút</div>
+      <nav className="navbar">
+        <div className="navbar-content">
+          <h1>Thi online miễn phí</h1>
+          <ul className="nav-links">
+            <li>
+              <Link to="/user">Trang chủ</Link>
+            </li>
+            <li>
+              <Link to="/courses">Các khóa thi</Link>
+            </li>
+            <li>
+              <Link to="/faq">Hỏi đáp</Link>
+            </li>
+            <li>
+              <Link to="/contact">Liên hệ</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div className="timer">Thời gian còn lại: {formatTime(timeLeft)}</div>
       <div className="questions-list">
-        {questions.map((question, index) => (
-          <div key={index} className="question-item">
-            <p>{question.question}</p>
+        {filteredQuestions.map((question, index) => (
+          <div key={question.id} className="question-item">
+            <h2>
+              Câu hỏi:{index + 1} {question.question}
+            </h2>
             <div className="options">
-              {question.options.map((option, optionIndex) => (
-                <label key={optionIndex}>
+              {question.option.map((opt: string, index: number) => (
+                <label key={index}>
                   <input
                     type="radio"
-                    name={`question-${index}`}
-                    value={optionIndex}
-                    checked={answers[index] === optionIndex}
-                    onChange={() => handleAnswerChange(index, optionIndex)}
+                    name={`question-${question.id}`}
+                    value={opt}
+                    onChange={() => handleAnswerChange(question.id, opt)}
                   />
-                  {option}
+                  {opt}
                 </label>
               ))}
             </div>
@@ -110,6 +182,11 @@ export default function Questions() {
       <button className="submit-btn" onClick={handleSubmit}>
         Nộp bài
       </button>
+      {totalTime > 0 && (
+        <div className="time-spent-info">
+          Thời gian làm bài: {formatTime(totalTime - timeLeft)}
+        </div>
+      )}
     </div>
   );
 }

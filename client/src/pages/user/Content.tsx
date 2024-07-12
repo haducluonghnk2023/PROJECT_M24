@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchCourse, getCourseId } from "../../service/course.servce";
+import {
+  fetchCourse,
+  fetchExamSubject,
+  getCourseId,
+} from "../../service/course.servce";
 
 export default function Banner() {
   const navigate = useNavigate();
@@ -9,14 +13,14 @@ export default function Banner() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   // console.log(course);
-
   useEffect(() => {
     dispatch(fetchCourse());
   }, []);
 
   const handleJoinCourse = (courseId: number) => {
     dispatch(getCourseId(courseId));
-    console.log(state);
+    dispatch(fetchExamSubject());
+    // console.log(111111111111111, state);
     navigate(`/course/${courseId}`);
     console.log(`${courseId}`);
   };
