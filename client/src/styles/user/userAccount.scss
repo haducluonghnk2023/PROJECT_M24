@@ -52,6 +52,12 @@
         }
       }
   
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+      
       .buttons {
         display: flex;
         justify-content: space-between;

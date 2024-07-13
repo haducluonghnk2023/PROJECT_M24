@@ -45,7 +45,7 @@ export default function Course() {
     navigate(`/questions/${testId}`);
   };
 
-  console.log(tests);
+  // console.log(tests);
 
   return (
     <div>

@@ -8,6 +8,7 @@ export default function UserAccount() {
   const [examHistory, setExamHistory] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedUserData, setUpdatedUserData] = useState<any>({});
+  const [errors, setErrors] = useState<any>({});
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +18,25 @@ export default function UserAccount() {
       [name]: value,
     }));
   };
+
+  const validate = () => {
+    const newErrors: any = {};
+    if (!updatedUserData.username) {
+      newErrors.username = "Tên không được để trống";
+    }
+    if (!updatedUserData.email) {
+      newErrors.email = "Email không được để trống";
+    } else if (!/\S+@\S+\.\S+/.test(updatedUserData.email)) {
+      newErrors.email = "Email không hợp lệ";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSaveChanges = async () => {
+    if (!validate()) {
+      return;
+    }
     try {
       const response = await axios.put(
         `http://localhost:8080/users/${userData.id}`,
@@ -34,20 +53,26 @@ export default function UserAccount() {
     }
   };
 
-  useEffect(() => {
-    const storedHistory = JSON.parse(
-      localStorage.getItem("examHistory") || "[]"
-    );
-    setExamHistory(storedHistory);
+  const fetchUserAnswers = async (email: string) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/useranswer?userEmail=${email}`
+      );
+      setExamHistory(response.data);
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu:", error);
+    }
+  };
 
+  useEffect(() => {
     const loggedInUser = JSON.parse(
       localStorage.getItem("loggedInUser") || "{}"
     );
 
     if (loggedInUser) {
-      console.log(111111);
       setUserData(loggedInUser);
       setUpdatedUserData(loggedInUser);
+      fetchUserAnswers(loggedInUser.email);
     }
   }, []);
 
@@ -67,6 +92,9 @@ export default function UserAccount() {
                   value={updatedUserData.username}
                   onChange={handleInputChange}
                 />
+                {errors.username && (
+                  <span className="error">{errors.username}</span>
+                )}
               </label>
               <label>
                 Email:
@@ -76,6 +104,7 @@ export default function UserAccount() {
                   value={updatedUserData.email}
                   onChange={handleInputChange}
                 />
+                {errors.email && <span className="error">{errors.email}</span>}
               </label>
               <button onClick={handleSaveChanges}>Lưu thay đổi</button>
               <button onClick={() => setIsEditing(false)}>Hủy</button>
@@ -89,6 +118,11 @@ export default function UserAccount() {
           )}
         </div>
       )}
+      {userData && userData.email === "admin@gmail.com" && (
+        <button onClick={() => navigate("/admin")}>
+          Chuyển đến trang Admin
+        </button>
+      )}
       <div className="exam-history">
         <h2>Lịch sử làm bài thi</h2>
         {examHistory.length > 0 ? (
@@ -97,7 +131,7 @@ export default function UserAccount() {
               <li key={index}>
                 Đề thi: {history.questionId}, Số câu đúng: {history.score}/
                 {history.totalQuestions}, Thời gian làm bài: {history.timeTaken}{" "}
-                giây
+                phút
               </li>
             ))}
           </ul>

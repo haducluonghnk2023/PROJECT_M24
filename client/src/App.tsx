@@ -20,6 +20,8 @@ import Questions from "./pages/user/Question";
 import Test from "./pages/user/Test";
 import UserAccount from "./pages/user/Account";
 import Content from "./pages/user/Content";
+import NotFound from "./pages/admin/NotFound";
+// import Logout from "./pages/admin/Logout";
 // import NotFound from "./pages/admin/NotFound";
 
 export default function App() {
@@ -48,8 +50,8 @@ export default function App() {
           <Route path="add-test" element={<AddTest />} />
           <Route path="add-question" element={<AddQuestion />} />
           <Route path="all-question" element={<AllQuestion />} />
-          {/* <Route path="*" element={<Navigate to="/not-found" />} /> */}
         </Route>
+        <Route path="*" element={<NotFound />} />
         {/* <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/not-found" />} /> */}
       </Routes>

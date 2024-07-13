@@ -12,7 +12,7 @@ export default function Header() {
         throw new Error("Lỗi lấy dữ liệu người dùng");
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Lỗi:", error);
     }

@@ -3,6 +3,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
 import { FormData } from "../../store/interface/interface";
+import { checkEmail } from "../../service/course.servce";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
   const [formData, setFormData] = useState<FormData>({
@@ -63,8 +65,15 @@ export default function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const result = await dispatch(checkEmail(formData));
+    if (result.payload.length > 0) {
+      alert("email đã tồn tại");
+      return;
+    }
     if (validate()) {
       bcrypt
         .hash(formData.password, 10)

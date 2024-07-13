@@ -7,6 +7,7 @@ import testReducer from "./reducers/testReducer";
 import questionReducer from "./reducers/questionReducer";
 import userReducer from "./reducers/userReducer";
 import userSubjectReducer from "./reducers/userSubjectReducer";
+import checkEmailReducer from "./reducers/checkEmailReducer";
 
 
 
@@ -19,8 +20,8 @@ const store:any = configureStore({
     test:testReducer,
     question:questionReducer,
     user:userReducer,
-    examSubject:userSubjectReducer
-  
+    examSubject:userSubjectReducer,
+    checkEmail:checkEmailReducer
   },
 });
 

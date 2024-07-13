@@ -55,7 +55,7 @@ export default function Admin() {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key === "logout") {
-              navigate("/login");
+              navigate("/login/admin");
             } else {
               navigate(key);
             }

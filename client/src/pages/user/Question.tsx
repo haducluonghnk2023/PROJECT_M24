@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../styles/user/question.scss";
 
 export default function Question() {
   const { questionId } = useParams<{ questionId: string }>();
   const [questions, setQuestions] = useState<any[]>([]);
   const [filteredQuestions, setFilteredQuestions] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [totalTime, setTotalTime] = useState<number>(0);
+  const questionsPerPage = 10;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,10 +36,7 @@ export default function Question() {
       const filtered = questions.filter(
         (question: any) => question.testId === parseInt(questionId!)
       );
-      console.log(filtered);
-
       setFilteredQuestions(filtered);
-      console.log(questions);
     }
   }, [questions, questionId]);
 
@@ -61,31 +61,26 @@ export default function Question() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch("http://localhost:8080/questions");
-      if (!response.ok) {
-        throw new Error("Lỗi lấy dữ liệu môn thi");
-      }
-      const data = await response.json();
-      setQuestions(data);
-      localStorage.setItem("questions", JSON.stringify(data));
+      const response = await axios.get("http://localhost:8080/questions");
+      setQuestions(response.data);
+      localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log(response);
     } catch (error) {
-      console.error("Lỗi:", error);
+      console.error("Lỗi khi lấy dữ liệu câu hỏi:", error);
     }
   };
 
   const fetchTestDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/test/${questionId}`);
-      if (!response.ok) {
-        throw new Error("Lỗi lấy dữ liệu bài thi");
-      }
-      const data = await response.json();
-      const durationInSeconds = data.duration * 60;
+      const response = await axios.get(
+        `http://localhost:8080/test/${questionId}`
+      );
+      const durationInSeconds = response.data.duration * 60;
       setTimeLeft(durationInSeconds);
       setTotalTime(durationInSeconds);
       localStorage.setItem("timeLeft", durationInSeconds.toString());
     } catch (error) {
-      console.error("Lỗi:", error);
+      console.error("Lỗi khi lấy dữ liệu bài thi:", error);
     }
   };
 
@@ -96,8 +91,11 @@ export default function Question() {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log(totalTime);
+  const handleSubmit = async () => {
+    const userEmail = JSON.parse(localStorage.getItem("loggedInUser")!).email;
+
+    console.log(userEmail);
+
     let score = 0;
     filteredQuestions.forEach((question) => {
       if (answers[question.id] === question.answer) {
@@ -108,25 +106,24 @@ export default function Question() {
     const timeSpent = totalTime - timeLeft; // Thời gian đã dùng làm bài
 
     const examHistory = {
-      questionId: questionId,
+      userEmail: userEmail,
+      testId: parseInt(questionId!),
       score: score,
       totalQuestions: filteredQuestions.length,
-      timeTaken: timeSpent,
+      timeTaken: Math.ceil(timeSpent / 60), // Thời gian làm bài tính bằng phút
     };
 
-    const storedHistory = JSON.parse(
-      localStorage.getItem("examHistory") || "[]"
-    );
-
-    storedHistory.push(examHistory);
-
-    localStorage.setItem("examHistory", JSON.stringify(storedHistory));
-    localStorage.removeItem("timeLeft");
-
-    alert(
-      `Bài thi đã được nộp! Số câu làm đúng của bạn: ${score}/${filteredQuestions.length}`
-    );
-    navigate("/user");
+    try {
+      await axios.post("http://localhost:8080/useranswer", examHistory);
+      alert(
+        `Bài thi đã được nộp! Số câu làm đúng của bạn: ${score}/${filteredQuestions.length}`
+      );
+      localStorage.removeItem("timeLeft");
+      navigate("/user");
+    } catch (error) {
+      console.error("Lỗi khi lưu lịch sử thi:", error);
+      alert("Đã xảy ra lỗi khi lưu lịch sử thi. Vui lòng thử lại.");
+    }
   };
 
   const formatTime = (time: number) => {
@@ -134,6 +131,16 @@ export default function Question() {
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // Lấy các câu hỏi của trang hiện tại
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = filteredQuestions.slice(
+    indexOfFirstQuestion,
+    indexOfLastQuestion
+  );
 
   return (
     <div className="questions-page">
@@ -158,10 +165,10 @@ export default function Question() {
       </nav>
       <div className="timer">Thời gian còn lại: {formatTime(timeLeft)}</div>
       <div className="questions-list">
-        {filteredQuestions.map((question, index) => (
+        {currentQuestions.map((question, index) => (
           <div key={question.id} className="question-item">
             <h2>
-              Câu hỏi:{index + 1} {question.question}
+              Câu hỏi: {index + 1 + indexOfFirstQuestion} {question.question}
             </h2>
             <div className="options">
               {question.option.map((opt: string, index: number) => (
@@ -179,14 +186,22 @@ export default function Question() {
           </div>
         ))}
       </div>
+      <div className="pagination">
+        {Array.from({
+          length: Math.ceil(filteredQuestions.length / questionsPerPage),
+        }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => paginate(index + 1)}
+            className={index + 1 === currentPage ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
       <button className="submit-btn" onClick={handleSubmit}>
         Nộp bài
       </button>
-      {totalTime > 0 && (
-        <div className="time-spent-info">
-          Thời gian làm bài: {formatTime(totalTime - timeLeft)}
-        </div>
-      )}
     </div>
   );
 }

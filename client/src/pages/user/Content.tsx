@@ -11,6 +11,9 @@ export default function Banner() {
   const navigate = useNavigate();
   const course = useSelector((state: any) => state.user.examSubject);
   const state = useSelector((state) => state);
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn") || "[]");
+  // console.log(isLoggedIn);
+
   const dispatch = useDispatch();
   // console.log(course);
   useEffect(() => {
@@ -18,11 +21,15 @@ export default function Banner() {
   }, []);
 
   const handleJoinCourse = (courseId: number) => {
+    if (isLoggedIn !== true) {
+      alert("Vui lòng đăng nhập để tham gia thi.");
+      return;
+    }
     dispatch(getCourseId(courseId));
     dispatch(fetchExamSubject());
     // console.log(111111111111111, state);
     navigate(`/course/${courseId}`);
-    console.log(`${courseId}`);
+    // console.log(`${courseId}`);
   };
 
   return (

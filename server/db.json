@@ -9,22 +9,22 @@
       "status": 1
     },
     {
-      "username": "phamvanminhngu",
-      "email": "pvm@gmail.com",
-      "password": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
+      "email": "haducluongdz@gmail.com",
+      "username": "haducluong",
+      "password": "$2a$10$8c1g.nezJf0Xdeif4DA11.trn8/xJqT3ZYGi3p8I9OnO2pGrm3Zjq",
+      "repassword": "$2a$10$8c1g.nezJf0Xdeif4DA11.trn8/xJqT3ZYGi3p8I9OnO2pGrm3Zjq",
       "role": 0,
       "status": 1,
-      "repassword": "$2a$10$UgN1bbJ8iFZPq1QHXEv37uRFJxjpXhsyY1jlRlquYH/D87AjhysZi",
-      "id": 4
+      "id": 2
     },
     {
       "email": "haducluong@gmail.com",
       "username": "haducluong",
-      "password": "$2a$10$IRHJTx6CXhdYZEoDRMU1kuO/tN6Jj9fnIFZuOYP/aFBpsbo.ELeiW",
-      "repassword": "$2a$10$IRHJTx6CXhdYZEoDRMU1kuO/tN6Jj9fnIFZuOYP/aFBpsbo.ELeiW",
+      "password": "$2a$10$CPGX6yfnA03N83ySvrlO5OKgNWKEQVWTZdmVvhAZNdAREEq1GJYM2",
+      "repassword": "$2a$10$CPGX6yfnA03N83ySvrlO5OKgNWKEQVWTZdmVvhAZNdAREEq1GJYM2",
       "role": 0,
       "status": 1,
-      "id": 5
+      "id": 3
     }
   ],
   "courses": [
@@ -103,6 +103,13 @@
       "duration": 60,
       "examSubjectId": 106,
       "id": 1112
+    },
+    {
+      "title": "Đề luyện thi vật lí 11",
+      "description": "Đề trắc nghiệm vật lí 11",
+      "duration": 60,
+      "examSubjectId": 105,
+      "id": 1113
     }
   ],
   "questions": [
@@ -629,11 +636,43 @@
   ],
   "userAnswer": [
     {
-      "id": 1,
-      "userId": 1,
-      "examId": 1,
-      "score": 15,
-      "answerUser": 1
+      "testId": 2,
+      "score": 1,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 13
+    },
+    {
+      "userEmail": "haducluongdz@gmail.com",
+      "testId": 1111,
+      "score": 1,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 15
+    },
+    {
+      "userEmail": "haducluong@gmail.com",
+      "testId": 1111,
+      "score": 6,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 16
+    },
+    {
+      "userEmail": "admin@gmail.com",
+      "testId": 1111,
+      "score": 1,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 17
+    },
+    {
+      "userEmail": "admin@gmail.com",
+      "testId": 2,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 18
     }
   ],
   "comments": [

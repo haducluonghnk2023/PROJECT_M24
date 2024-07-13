@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
+import ReactPaginate from "react-paginate";
 import "../../styles/admin/allSubject.scss";
 import {
   deleteQuestion,
@@ -12,6 +13,9 @@ export default function AllSubject() {
   const dispatch: AppDispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.question.questions);
   const [editMode, setEditMode] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const questionsPerPage = 10;
+
   const [currentQuestion, setCurrentQuestion] = useState<any>({
     id: "",
     question: "",
@@ -81,6 +85,17 @@ export default function AllSubject() {
     }
   };
 
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
+  };
+
+  // Lấy dữ liệu câu hỏi hiện tại dựa trên trang hiện tại và số câu hỏi mỗi trang
+  const offset = currentPage * questionsPerPage;
+  const currentPageQuestions = questions.slice(
+    offset,
+    offset + questionsPerPage
+  );
+
   return (
     <div className="table-container">
       <table className="subject-table">
@@ -92,8 +107,8 @@ export default function AllSubject() {
           </tr>
         </thead>
         <tbody>
-          {questions && questions.length > 0 ? (
-            questions.map((item: any) => (
+          {currentPageQuestions && currentPageQuestions.length > 0 ? (
+            currentPageQuestions.map((item: any) => (
               <tr key={item.id}>
                 <td>{item.question}</td>
                 <td>{item.answer}</td>
@@ -117,6 +132,18 @@ export default function AllSubject() {
           )}
         </tbody>
       </table>
+      <ReactPaginate
+        previousLabel={"Trước"}
+        nextLabel={"Sau"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={Math.ceil(questions.length / questionsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+      />
       {editMode && (
         <div className="edit-form">
           <h3>Sửa thông tin câu hỏi</h3>

@@ -270,6 +270,17 @@ export const getTestId :any = createAsyncThunk("get/testId", async(id)=>{
   return id;
 })
 
+export const checkEmail:any = createAsyncThunk("checkEmail",
+  async (checkEmails:any, {rejectWithValue})=>{
+    try {
+      const response = await axios.get(`http://localhost:8080/users?email=${checkEmails.email}`);
+      return response.data;
+    } catch (error:any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
 
 
 
