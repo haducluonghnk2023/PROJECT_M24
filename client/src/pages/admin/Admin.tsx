@@ -55,6 +55,7 @@ export default function Admin() {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key === "logout") {
+              localStorage.removeItem("adminToken");
               navigate("/login/admin");
             } else {
               navigate(key);

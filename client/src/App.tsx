@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Admin from "./pages/admin/Admin";
 import DashBoard from "./pages/admin/DashBoard";
 import AllUser from "./pages/admin/AllUser";
@@ -21,6 +21,7 @@ import Test from "./pages/user/Test";
 import UserAccount from "./pages/user/Account";
 import Content from "./pages/user/Content";
 import NotFound from "./pages/admin/NotFound";
+import PrivateRoute from "./pages/admin/PrivateRouter";
 // import Logout from "./pages/admin/Logout";
 // import NotFound from "./pages/admin/NotFound";
 
@@ -38,7 +39,14 @@ export default function App() {
         <Route path="/test/:testId" element={<Test />} />
         <Route path="/questions/:questionId" element={<Questions />} />
         <Route path="login/admin" element={<Login />}></Route>
-        <Route path="/admin" element={<Admin />}>
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        >
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="all-user" element={<AllUser />} />
           <Route path="add-course" element={<AddCourse />} />
@@ -52,8 +60,8 @@ export default function App() {
           <Route path="all-question" element={<AllQuestion />} />
         </Route>
         <Route path="*" element={<NotFound />} />
-        {/* <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/not-found" />} /> */}
+
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </div>
   );

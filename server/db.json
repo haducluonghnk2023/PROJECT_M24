@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "username": "admin",
+      "username": "adminn",
       "password": "$2a$10$hSb0Bp4R8hUu4gVkDORkH.Mb3Q38TPgJHO7DPXmEvsCm2imzrIQHO",
       "email": "admin@gmail.com",
       "role": 1,
@@ -25,6 +25,15 @@
       "role": 0,
       "status": 1,
       "id": 3
+    },
+    {
+      "email": "haducluon@gmail.com",
+      "username": "haducluong",
+      "password": "$2a$10$zLXGgwdU87W/JD.WyjvyfOPuXHuwjSBjmmz9kH4pmy6qJt03DcZE2",
+      "repassword": "$2a$10$zLXGgwdU87W/JD.WyjvyfOPuXHuwjSBjmmz9kH4pmy6qJt03DcZE2",
+      "role": 0,
+      "status": 1,
+      "id": 4
     }
   ],
   "courses": [
@@ -62,24 +71,6 @@
       "title": "Vật lí lớp 12",
       "description": "Luyện thi vật lí lớp 12",
       "courseId": 20
-    },
-    {
-      "id": 104,
-      "title": "Hóa học lớp 12",
-      "description": "Luyện thi Hóa học lớp 12",
-      "courseId": 20
-    },
-    {
-      "id": 105,
-      "title": "Vật lí lớp 11",
-      "description": "Luyện thi vật lí lớp 11",
-      "courseId": 20
-    },
-    {
-      "title": "Vật lí lớp 10",
-      "description": "Luyện thi vật lí cho học sinh lớp 10",
-      "courseId": 20,
-      "id": 106
     }
   ],
   "test": [
@@ -668,11 +659,51 @@
     },
     {
       "userEmail": "admin@gmail.com",
+      "testId": 1111,
+      "score": 1,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 18
+    },
+    {
+      "userEmail": "admin@gmail.com",
       "testId": 2,
       "score": 0,
       "totalQuestions": 20,
       "timeTaken": 1,
-      "id": 18
+      "id": 19
+    },
+    {
+      "userEmail": "haducluong@gmail.com",
+      "testId": 1111,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 20
+    },
+    {
+      "userEmail": "haducluong@gmail.com",
+      "testId": 1111,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 21
+    },
+    {
+      "userEmail": "admin@gmail.com",
+      "testId": 1111,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 22
+    },
+    {
+      "userEmail": "admin@gmail.com",
+      "testId": 2,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": -89,
+      "id": 23
     }
   ],
   "comments": [

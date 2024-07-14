@@ -11,7 +11,7 @@ export default function Question() {
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [totalTime, setTotalTime] = useState<number>(0);
-  const questionsPerPage = 10;
+  const questionsPerPage = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function Question() {
     try {
       const response = await axios.get("http://localhost:8080/questions");
       setQuestions(response.data);
-      localStorage.setItem("questions", JSON.stringify(response.data));
+      // localStorage.setItem("questions", JSON.stringify(response.data));
       console.log(response);
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu câu hỏi:", error);

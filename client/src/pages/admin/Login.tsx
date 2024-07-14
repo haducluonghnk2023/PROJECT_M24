@@ -62,6 +62,7 @@ export default function Login() {
 
           if (passwordMatch) {
             console.log("Đăng nhập thành công:", user);
+            localStorage.setItem("adminToken", "your-token-here");
             navigate("/admin");
           } else {
             setErrorMessage(
