@@ -34,6 +34,24 @@
       "role": 0,
       "status": 1,
       "id": 4
+    },
+    {
+      "email": "demo@gmail.com",
+      "username": "ducluong",
+      "password": "$2a$10$3dFKRbmlGZJpLl.T.2Eo3Ov9ITjmAjIC/R3qBXx6no1d46LU/Kh6W",
+      "repassword": "$2a$10$3dFKRbmlGZJpLl.T.2Eo3Ov9ITjmAjIC/R3qBXx6no1d46LU/Kh6W",
+      "role": 0,
+      "status": 1,
+      "id": 5
+    },
+    {
+      "username": "haducluong",
+      "email": "test1@gmail.com",
+      "password": "$2a$10$yor.qqnPFgDublh6V5h0MOEo2Yd/6Ti8xJ/PKAF0Fs/PuMniCKJP.",
+      "role": 0,
+      "status": 1,
+      "repassword": "$2a$10$yor.qqnPFgDublh6V5h0MOEo2Yd/6Ti8xJ/PKAF0Fs/PuMniCKJP.",
+      "id": 6
     }
   ],
   "courses": [
@@ -704,6 +722,22 @@
       "totalQuestions": 20,
       "timeTaken": -89,
       "id": 23
+    },
+    {
+      "userEmail": "test1@gmail.com",
+      "testId": 2,
+      "score": 0,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 24
+    },
+    {
+      "userEmail": "test1@gmail.com",
+      "testId": 1111,
+      "score": 1,
+      "totalQuestions": 20,
+      "timeTaken": 1,
+      "id": 25
     }
   ],
   "comments": [

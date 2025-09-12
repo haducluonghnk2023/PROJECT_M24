@@ -1,67 +1,92 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import Admin from "./pages/admin/Admin";
-import DashBoard from "./pages/admin/DashBoard";
+import { Route, Routes } from "react-router-dom";
+import { UserLayout } from "./layouts/UserLayout";
+import { AdminLayout } from "./layouts/AdminLayout";
+import { LoginPage } from "./pages/auth/LoginPage";
+import { AdminLoginPage } from "./pages/auth/AdminLoginPage";
+import { RegisterPage } from "./pages/auth/RegisterPage";
+import { HomePage } from "./pages/user/HomePage";
+import { CoursePage } from "./pages/user/CoursePage";
+import UserAccount from "./pages/user/Account";
+import Question from "./pages/user/Question";
+import Test from "./pages/user/Test";
+import { DashboardPage } from "./pages/admin/DashboardPage";
+import AddUser from "./pages/admin/AddUser";
 import AllUser from "./pages/admin/AllUser";
-import AddCourse from "./pages/admin/AddCourses";
-import AllCourse from "./pages/admin/AllCourses";
+import AddCourses from "./pages/admin/AddCourses";
+import AllCourses from "./pages/admin/AllCourses";
 import AddSubject from "./pages/admin/AddSubject";
 import AllSubject from "./pages/admin/AllSubject";
-import LoginUser from "./pages/user/Login";
-import Login from "./pages/admin/Login";
-import AddUser from "./pages/admin/AddUser";
-import AllTest from "./pages/admin/AllTest";
 import AddTest from "./pages/admin/AddTest";
+import AllTest from "./pages/admin/AllTest";
 import AddQuestion from "./pages/admin/AddQuestion";
 import AllQuestion from "./pages/admin/AllQuestion";
-import Register from "./pages/user/Register";
-import User from "./pages/user/User";
-import Course from "./pages/user/Course";
-import Questions from "./pages/user/Question";
-import Test from "./pages/user/Test";
-import UserAccount from "./pages/user/Account";
-import Content from "./pages/user/Content";
-import NotFound from "./pages/admin/NotFound";
-import PrivateRoute from "./pages/admin/PrivateRouter";
-// import Logout from "./pages/admin/Logout";
-// import NotFound from "./pages/admin/NotFound";
+import { ROUTES } from "./constants";
 
 export default function App() {
   return (
     <div>
       <Routes>
-        <Route path="register/user" element={<Register></Register>}></Route>
-        <Route path="register/user/login" element={<LoginUser />}></Route>
-        <Route path="user" element={<User />}>
-          <Route path="/user/content" element={<Content />}></Route>
+        {/* Public routes */}
+        <Route path={ROUTES.USER_REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.USER_LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.ADMIN_LOGIN} element={<AdminLoginPage />} />
+        
+        {/* User routes */}
+        <Route path={ROUTES.USER_HOME} element={<UserLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="content" element={<HomePage />} />
+          <Route path="account" element={<UserAccount />} />
         </Route>
-        <Route path="/user/account" element={<UserAccount />} />
-        <Route path="/course/:courseId" element={<Course />} />
-        <Route path="/test/:testId" element={<Test />} />
-        <Route path="/questions/:questionId" element={<Questions />} />
-        <Route path="login/admin" element={<Login />}></Route>
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute>
-              <Admin />
-            </PrivateRoute>
-          }
-        >
-          <Route path="dashboard" element={<DashBoard />} />
+        
+        {/* Courses route */}
+        <Route path="/courses" element={<UserLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+        
+        {/* Course detail route */}
+        <Route path={ROUTES.COURSE_DETAIL} element={<CoursePage />} />
+        
+        {/* Test and Question routes */}
+        <Route path={ROUTES.TEST_DETAIL} element={<UserLayout />}>
+          <Route index element={<Test />} />
+        </Route>
+        <Route path={ROUTES.QUESTION_DETAIL} element={<UserLayout />}>
+          <Route index element={<Question />} />
+        </Route>
+        
+        {/* Admin routes */}
+        <Route path={ROUTES.ADMIN_DASHBOARD} element={<AdminLayout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          
+          {/* User management routes */}
+          <Route path="add-user" element={<AddUser />} />
           <Route path="all-user" element={<AllUser />} />
-          <Route path="add-course" element={<AddCourse />} />
-          <Route path="all-course" element={<AllCourse />} />
+          
+          {/* Course management routes */}
+          <Route path="add-course" element={<AddCourses />} />
+          <Route path="all-course" element={<AllCourses />} />
+          
+          {/* Subject management routes */}
           <Route path="add-subject" element={<AddSubject />} />
           <Route path="all-subject" element={<AllSubject />} />
-          <Route path="add-user" element={<AddUser />} />
-          <Route path="all-test" element={<AllTest />} />
+          
+          {/* Test management routes */}
           <Route path="add-test" element={<AddTest />} />
+          <Route path="all-test" element={<AllTest />} />
+          
+          {/* Question management routes */}
           <Route path="add-question" element={<AddQuestion />} />
           <Route path="all-question" element={<AllQuestion />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-
-        <Route path="*" element={<Navigate to="/not-found" />} />
+        
+        {/* Root redirect */}
+        <Route path={ROUTES.HOME} element={<UserLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+        
+        {/* 404 route */}
+        <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
     </div>
   );

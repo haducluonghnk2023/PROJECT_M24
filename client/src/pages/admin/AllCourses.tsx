@@ -8,6 +8,7 @@ import {
   fetchCourses,
   updateCourse,
 } from "../../service/course.servce";
+import { confirmDelete, showSuccess, showError } from "../../utils/confirmDialog";
 
 interface Course {
   id: string;
@@ -35,14 +36,18 @@ export default function AllCourse() {
   }, [dispatch]);
 
   const handleDelete = async (courseId: string) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa khóa học này?");
-    if (confirmDelete) {
-      try {
-        const response = await dispatch(deleteCourse(courseId));
-        console.log("Xóa thành công:", response);
-      } catch (error) {
-        console.error("Xóa không thành công:", error);
+    const confirmed = await confirmDelete("khóa học này");
+    if (!confirmed) return;
+
+    try {
+      const response = await dispatch(deleteCourse(courseId));
+      if (response.meta.requestStatus === "fulfilled") {
+        showSuccess("Xóa thành công", "Đã xóa khóa học thành công!");
+        dispatch(fetchCourses());
       }
+    } catch (error) {
+      console.error("Xóa không thành công:", error);
+      showError("Lỗi xóa khóa học", "Có lỗi xảy ra khi xóa khóa học!");
     }
   };
 

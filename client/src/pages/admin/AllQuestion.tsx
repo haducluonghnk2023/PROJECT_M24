@@ -8,6 +8,7 @@ import {
   fetchQuestion,
   updateQuestion,
 } from "../../service/course.servce";
+import { confirmDelete, showSuccess, showError } from "../../utils/confirmDialog";
 
 export default function AllSubject() {
   const dispatch: AppDispatch = useDispatch();
@@ -36,15 +37,18 @@ export default function AllSubject() {
   };
 
   const handleDelete = async (questionId: string) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa câu hỏi này?");
-    if (confirmDelete) {
-      try {
-        const response = await dispatch(deleteQuestion(questionId));
+    const confirmed = await confirmDelete("câu hỏi này");
+    if (!confirmed) return;
+
+    try {
+      const response = await dispatch(deleteQuestion(questionId));
+      if (response.meta.requestStatus === "fulfilled") {
+        showSuccess("Xóa thành công", "Đã xóa câu hỏi thành công!");
         dispatch(fetchQuestion());
-        console.log("Xóa thành công:", response);
-      } catch (error) {
-        console.error("Xóa không thành công:", error);
       }
+    } catch (error) {
+      console.error("Xóa không thành công:", error);
+      showError("Lỗi xóa câu hỏi", "Có lỗi xảy ra khi xóa câu hỏi!");
     }
   };
 

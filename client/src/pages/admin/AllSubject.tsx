@@ -8,6 +8,7 @@ import {
   fetchTest,
   updateSubject,
 } from "../../service/course.servce";
+import { confirmDelete, showSuccess, showError } from "../../utils/confirmDialog";
 import "../../styles/admin/allSubject.scss";
 
 export default function AllSubject() {
@@ -47,14 +48,18 @@ export default function AllSubject() {
   };
 
   const handleDelete = async (subjectId: string) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa khóa học này?");
-    if (confirmDelete) {
-      try {
-        const response = await dispatch(deleteSubject(subjectId));
-        console.log("Xóa thành công:", response);
-      } catch (error) {
-        console.error("Xóa không thành công:", error);
+    const confirmed = await confirmDelete("môn thi này");
+    if (!confirmed) return;
+
+    try {
+      const response = await dispatch(deleteSubject(subjectId));
+      if (response.meta.requestStatus === "fulfilled") {
+        showSuccess("Xóa thành công", "Đã xóa môn thi thành công!");
+        dispatch(fetchExamSubject());
       }
+    } catch (error) {
+      console.error("Xóa không thành công:", error);
+      showError("Lỗi xóa môn thi", "Có lỗi xảy ra khi xóa môn thi!");
     }
   };
 

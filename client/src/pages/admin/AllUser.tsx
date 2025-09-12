@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchUsers, updateUserStatus } from "../../service/course.servce";
 import { User } from "../../store/interface/interface";
+import { showSuccess, showError } from "../../utils/confirmDialog";
 
 export default function AllUser() {
   const dispatch: AppDispatch = useDispatch();
@@ -46,19 +47,38 @@ export default function AllUser() {
     setCurrentPage(event.selected);
   };
 
+  const clearSearch = () => {
+    setSearchUser("");
+    setCurrentPage(0);
+  };
+
+  // Reset search when users change
+  useEffect(() => {
+    if (searchUser && users.length === 0) {
+      setSearchUser("");
+    }
+  }, [users, searchUser]);
+
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
   };
 
   return (
     <div className="table-container">
-      <input
-        value={searchUser}
-        onChange={(e) => setSearchUser(e.target.value)}
-        className="int"
-        type="text"
-        placeholder="Nhập tên cần tìm kiếm"
-      />
+      <div className="search-container">
+        <input
+          value={searchUser}
+          onChange={(e) => setSearchUser(e.target.value)}
+          className="int"
+          type="text"
+          placeholder="Nhập tên cần tìm kiếm"
+        />
+        {searchUser && (
+          <button onClick={clearSearch} className="clear-search-btn">
+            ✕
+          </button>
+        )}
+      </div>
       <select name="" id="" onChange={handleSortChange}>
         <option value="">Sắp xếp :</option>
         <option value="increase">Tăng dần</option>

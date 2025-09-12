@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { deleteTest, fetchTest, updateTest } from "../../service/course.servce";
 import "../../styles/admin/allSubject.scss";
+import { confirmDelete, showSuccess, showError } from "../../utils/confirmDialog";
 
 export default function AllTest() {
   const dispatch: AppDispatch = useDispatch();
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [searchTest, setSearchTest] = useState("");
   const test = useSelector((state: RootState) => state.test.test);
   const [currentTest, setCurrentTest] = useState<any>({
     id: "",
@@ -70,19 +72,48 @@ export default function AllTest() {
 
   //hàm xóa đề thi
   const handleDelete = async (testId: string) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa khóa học này?");
-    if (confirmDelete) {
-      try {
-        const response = await dispatch(deleteTest(testId));
-        console.log("Xóa thành công:", response);
-      } catch (error) {
-        console.error("Xóa không thành công:", error);
+    const confirmed = await confirmDelete("đề thi này");
+    if (!confirmed) return;
+
+    try {
+      const response = await dispatch(deleteTest(testId));
+      if (response.meta.requestStatus === "fulfilled") {
+        showSuccess("Xóa thành công", "Đã xóa đề thi thành công!");
+        dispatch(fetchTest());
       }
+    } catch (error) {
+      console.error("Xóa không thành công:", error);
+      showError("Lỗi xóa đề thi", "Có lỗi xảy ra khi xóa đề thi!");
     }
   };
 
+  const clearSearch = () => {
+    setSearchTest("");
+  };
+
+  // Reset search when test changes
+  useEffect(() => {
+    if (searchTest && test.length === 0) {
+      setSearchTest("");
+    }
+  }, [test, searchTest]);
+
   return (
     <div className="table-container">
+      <div className="search-container">
+        <input
+          value={searchTest}
+          onChange={(e) => setSearchTest(e.target.value)}
+          className="int"
+          type="text"
+          placeholder="Nhập tên đề thi cần tìm kiếm"
+        />
+        {searchTest && (
+          <button onClick={clearSearch} className="clear-search-btn">
+            ✕
+          </button>
+        )}
+      </div>
       <table className="subject-table">
         <thead>
           <tr>
